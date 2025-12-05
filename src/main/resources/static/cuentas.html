@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cuentas vinculadas - BrawlLMB Analytics</title>
+
+    <link rel="icon" href="/favicon_kenji.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0f0f, #1a1a1a 40%, #202020);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .bg-logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 650px;
+            height: 650px;
+            transform: translate(-50%, -50%);
+            opacity: 0.05;
+            background: url('images/logo_lmb.png') center/contain no-repeat;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        header {
+            background: rgba(20,20,20,0.85);
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+            z-index: 2;
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-box img {
+            width: 42px;
+            height: 42px;
+        }
+
+        .logo-box h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        nav a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: #ddd;
+            font-weight: 500;
+            transition: .3s;
+        }
+
+        nav a:hover {
+            color: #4da3ff;
+        }
+
+        main {
+            flex: 1;
+            padding: 50px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        main h2 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        main p {
+            opacity: .75;
+            margin-bottom: 30px;
+        }
+
+        .cuentas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .cuenta-card {
+            background: rgba(255,255,255,0.06);
+            padding: 25px;
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+            transition: .25s;
+        }
+
+        .cuenta-card:hover {
+            background: rgba(255,255,255,0.10);
+            transform: translateY(-4px);
+        }
+
+        .cuenta-card h3 {
+            margin-top: 0;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            background: #4da3ff;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: .25s;
+            box-shadow: 0 4px 15px rgba(77,163,255,0.4);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #1f8aff;
+            box-shadow: 0 6px 20px rgba(77,163,255,0.65);
+            transform: translateY(-2px);
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="bg-logo"></div>
+
+<header>
+    <div class="logo-box">
+        <img src="images/logo_lmb.png" alt="logo">
+        <h1>BrawlLMB Analytics</h1>
+    </div>
+
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="cuenta.html">Mi Cuenta Brawl</a>
+        <a href="estadisticas.html">Estadísticas</a>
+        <a href="mapas.html">Mapas</a>
+        <a href="tierlist.html">Tierlist</a>
+        <a href="cuentas.html">Cuentas vinculadas</a>
+        <a href="#" onclick="logout()">Cerrar Sesión</a>
+    </nav>
+</header>
+
+<main>
+    <h2>Mis cuentas vinculadas</h2>
+    <p>Selecciona una cuenta para ver sus estadísticas de jugador y de brawlers.</p>
+
+    <div id="cuentasContainer" class="cuentas-grid"></div>
+</main>
+
+<script src="js/auth.js"></script>
+</body>
+</html>

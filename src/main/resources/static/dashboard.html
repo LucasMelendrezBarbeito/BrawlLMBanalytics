@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel - BrawlLMB Analytics</title>
+
+    <link rel="icon" href="/favicon_kenji.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0f0f, #1a1a1a 40%, #202020);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .bg-logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 650px;
+            height: 650px;
+            transform: translate(-50%, -50%);
+            opacity: 0.05;
+            background: url('images/logo_lmb.png') center/contain no-repeat;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        header {
+            background: rgba(20, 20, 20, 0.85);
+            padding: 18px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+            z-index: 2;
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-box img {
+            width: 42px;
+            height: 42px;
+        }
+
+        .logo-box h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        nav a {
+            margin-left: 25px;
+            color: #ddd;
+            text-decoration: none;
+            font-weight: 500;
+            transition: .3s;
+        }
+
+        nav a:hover {
+            color: #4da3ff;
+        }
+
+        main {
+            flex: 1;
+            padding: 50px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        main h2 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        main p {
+            font-size: 18px;
+            opacity: 0.8;
+        }
+
+        .panel-opciones {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .panel-card {
+            background: rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-decoration: none;
+            color: white;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            transition: 0.25s ease;
+            display: block;
+        }
+
+        .panel-card:hover {
+            background: rgba(255,255,255,0.12);
+            transform: translateY(-6px);
+            box-shadow: 0 10px 28px rgba(0,0,0,0.45);
+        }
+
+        .panel-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .panel-card p {
+            opacity: 0.85;
+            font-size: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            color: #777;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 2;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="bg-logo"></div>
+
+<header>
+    <div class="logo-box">
+        <img src="images/logo_lmb.png" alt="logo">
+        <h1>BrawlLMB Analytics</h1>
+    </div>
+
+    <nav>
+        <a href="cuenta.html">Mi Cuenta Brawl</a>
+        <a href="estadisticas.html">Estadísticas</a>
+        <a href="mapas.html">Mapas</a>
+        <a href="tierlist.html">Tierlist</a>
+        <a href="#" onclick="logout()">Cerrar Sesión</a>
+    </nav>
+</header>
+
+<main>
+    <h2>Panel de Control</h2>
+    <p>Selecciona una sección para acceder a tus herramientas.</p>
+
+    <div class="panel-opciones">
+
+        <a class="panel-card" href="cuenta.html">
+            <h3>Mi Cuenta Brawl</h3>
+            <p>Vincula y gestiona tu cuenta de Brawl Stars.</p>
+        </a>
+
+        <a class="panel-card" href="estadisticas.html">
+            <h3>Estadísticas</h3>
+            <p>Consulta estadísticas de jugador y brawlers.</p>
+        </a>
+
+        <a class="panel-card" href="mapas.html">
+            <h3>Mapas</h3>
+            <p>Explora mapas y mejores brawlers para cada uno.</p>
+        </a>
+
+        <a class="panel-card" href="tierlist.html">
+            <h3>Tierlists</h3>
+            <p>Crea tierlists profesionales y compártelas.</p>
+        </a>
+
+    </div>
+</main>
+
+<footer>
+    © 2025 BrawlLMB Analytics — Todos los derechos reservados.
+</footer>
+
+<script src="js/auth.js"></script>
+</body>
+</html>

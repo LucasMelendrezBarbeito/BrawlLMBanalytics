@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro - BrawlLMB Analytics</title>
+
+    <link rel="icon" href="/favicon_kenji.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0f0f, #1a1a1a 40%, #202020);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .bg-logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 600px;
+            height: 600px;
+            transform: translate(-50%, -50%);
+            opacity: 0.06;
+            background: url('images/logo_lmb.png') center/contain no-repeat;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        header {
+            background: rgba(20, 20, 20, 0.85);
+            padding: 18px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+            z-index: 2;
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-box img {
+            width: 42px;
+            height: 42px;
+        }
+
+        .logo-box h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        nav a {
+            margin-left: 25px;
+            color: #ddd;
+            text-decoration: none;
+            transition: .3s;
+        }
+
+        nav a:hover {
+            color: #4da3ff;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .glass-box {
+            background: rgba(255,255,255,0.05);
+            padding: 40px;
+            border-radius: 16px;
+            width: 380px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 25px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        form label {
+            display: block;
+            margin-top: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        form input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            border-radius: 8px;
+            border: none;
+            background: #222;
+            color: white;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .btn {
+            width: 100%;
+            background: #4da3ff;
+            padding: 12px;
+            margin-top: 25px;
+            border-radius: 8px;
+            border: none;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1f8aff;
+            transform: translateY(-2px);
+        }
+
+        p {
+            margin-top: 15px;
+            font-size: 15px;
+        }
+
+        p a {
+            color: #4da3ff;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 12px;
+            font-size: 14px;
+            opacity: 0.6;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="bg-logo"></div>
+
+<header>
+    <div class="logo-box">
+        <img src="images/logo_lmb.png" alt="logo">
+        <h1>BrawlLMB Analytics</h1>
+    </div>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Registro</a>
+    </nav>
+</header>
+
+<main>
+    <div class="glass-box">
+        <h2>Crear Cuenta</h2>
+
+        <form id="registerForm">
+            <label>Usuario</label>
+            <input type="text" id="reg_usuario" required>
+
+            <label>Email</label>
+            <input type="email" id="reg_email" required>
+
+            <label>Contraseña</label>
+            <input type="password" id="reg_password" required>
+
+            <button type="submit" class="btn">Crear Cuenta</button>
+        </form>
+
+        <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+    </div>
+</main>
+
+<footer>
+    © 2025 BrawlLMB Analytics — Todos los derechos reservados.
+</footer>
+
+<script src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>BrawlLMB Analytics - Inicio</title>
+    <link rel="icon" href="/favicon_kenji.ico" type="image/x-icon">
+
+    <!-- Fuente moderna -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0f0f, #1a1a1a 40%, #202020);
+            color: #fff;
+
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .bg-logo {
+            position: fixed;
+            top: 55%;
+            left: 50%;
+            width: 750px;
+            height: 750px;
+            transform: translate(-50%, -50%);
+            opacity: 0.045;
+            background: url('images/logo_lmb.png') center/contain no-repeat;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        header {
+            background: rgba(20, 20, 20, 0.85);
+            padding: 18px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+            position: relative;
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-box img {
+            width: 44px;
+            height: 44px;
+        }
+
+        .logo-box h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        nav a {
+            margin-left: 25px;
+            color: #ddd;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #4da3ff;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center;
+            padding: 60px 20px;
+            text-align: center;
+            z-index: 2;
+        }
+
+        main h2 {
+            font-size: 38px;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        main p {
+            font-size: 18px;
+            opacity: 0.85;
+            max-width: 600px;
+            margin: 0 auto 60px auto; 
+        }
+
+        .glass-box {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 45px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.35);
+            max-width: 550px;
+        }
+
+        .botones-principales {
+            margin-top: 30px;
+            display: flex;
+            gap: 22px;
+            justify-content: center;
+        }
+
+        .btn {
+            background: #4da3ff;
+            color: #fff;
+            padding: 14px 26px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 17px;
+            transition: 0.3s;
+            box-shadow: 0 4px 12px rgba(77, 163, 255, 0.3);
+        }
+
+        .btn:hover {
+            background: #1f8aff;
+            box-shadow: 0 6px 18px rgba(77, 163, 255, 0.45);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            color: #777;
+            font-size: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 2;
+            position: relative;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="bg-logo"></div>
+
+    <header>
+        <div class="logo-box">
+            <img src="images/logo_lmb.png" alt="logo">
+            <h1>BrawlLMB Analytics</h1>
+        </div>
+
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Registro</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Bienvenido a BrawlLMB Analytics</h2>
+        <p>Una plataforma avanzada para analizar jugadores, estadísticas, mapas y rendimiento en Brawl Stars.</p>
+
+        <div class="glass-box">
+            <h3 style="margin-bottom: 22px; font-size: 22px;">Empieza ahora mismo</h3>
+
+            <div class="botones-principales">
+                <a class="btn" href="login.html">Iniciar Sesión</a>
+                <a class="btn" href="register.html">Crear Cuenta</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        © 2025 BrawlLMB Analytics — Todos los derechos reservados.
+    </footer>
+
+</body>
+</html>
