@@ -38,7 +38,6 @@ Gestionado con **Maven**, el proyecto utiliza las siguientes librerías core:
   Tokens.
 * **HttpClient 5:** Cliente de alto rendimiento para el consumo de las APIs de
   Supercell.
-* **Lombok:** Optimización de código (Getters/Setters automáticos).
 * **Validation:** Validación de datos en los formularios y DTOs.
 
 #### Frontend
@@ -50,7 +49,7 @@ Gestionado con **Maven**, el proyecto utiliza las siguientes librerías core:
 
 ### Infraestructura y Base de Datos 
 > [!NOTE] 
-> Esta sección se encuentra actualmente en desarrollo. Se estátrabajando en la implementación de **Docker** para automatizar el
+> Esta sección se encuentra actualmente en desarrollo. Se está trabajando en la implementación de **Docker** 
 > para automatizar el despliegue de la base de datos MySQL. En cuanto esté finalizado, se añadirán las
 > instrucciones necesarias en el apartado de instalación.
 
@@ -58,9 +57,10 @@ Gestionado con **Maven**, el proyecto utiliza las siguientes librerías core:
 
 ### Build (Instalación)
 
+
 1. **Clonar el repositorio:**
    ```bash
-   git clone [https://github.com/LucasMelendrezBarbeito/BrawlLMBanalytics.git](https://github.com/LucasMelendrezBarbeito/BrawlLMBanalytics.git)
+   git clone https://github.com/LucasMelendrezBarbeito/BrawlLMBanalytics.git
    ```
 
 2. **Configurar las variables de entorno:** Edita el archivo
@@ -69,9 +69,8 @@ Gestionado con **Maven**, el proyecto utiliza las siguientes librerías core:
    spring.datasource.url=jdbc:mysql://localhost:3306/nombre_tu_db
    brawl.api.token=Bearer TU_TOKEN_AQUI
    ```
-
-   > [!IMPORTANT] 
-   > Debes generar tu token y registrar tu IP en el [Portal deDesarrolladores de Supercell](https://developer.brawlstars.com/).
+> [!IMPORTANT] 
+> Debes generar tu token y registrar tu IP en el [Portal deDesarrolladores de Supercell](https://developer.brawlstars.com/).
 
 3. **Ejecución del proyecto:**
    ```bash
