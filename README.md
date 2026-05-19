@@ -49,9 +49,9 @@ Gestionado con **Maven**, el proyecto utiliza las siguientes librerías core:
 ---
 
 ### Infraestructura y Base de Datos 
-> [!NOTE] Esta sección se encuentra actualmente en desarrollo. Se está
-> trabajando en la implementación de **Docker** para automatizar el despliegue
-> de la base de datos MySQL. En cuanto esté finalizado, se añadirán las
+> [!NOTE] 
+> Esta sección se encuentra actualmente en desarrollo. Se estátrabajando en la implementación de **Docker** para automatizar el
+> para automatizar el despliegue de la base de datos MySQL. En cuanto esté finalizado, se añadirán las
 > instrucciones necesarias en el apartado de instalación.
 
 ---
@@ -70,8 +70,8 @@ Gestionado con **Maven**, el proyecto utiliza las siguientes librerías core:
    brawl.api.token=Bearer TU_TOKEN_AQUI
    ```
 
-   > [!IMPORTANT] Debes generar tu token y registrar tu IP en el [Portal de
-   > Desarrolladores de Supercell](https://developer.brawlstars.com/).
+   > [!IMPORTANT] 
+   > Debes generar tu token y registrar tu IP en el [Portal deDesarrolladores de Supercell](https://developer.brawlstars.com/).
 
 3. **Ejecución del proyecto:**
    ```bash
