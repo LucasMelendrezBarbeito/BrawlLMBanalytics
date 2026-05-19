@@ -1,9 +1,15 @@
 package com.brawllmbanalytics.controllers;
 
+import java.util.List;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.brawllmbanalytics.entities.Brawler;
 import com.brawllmbanalytics.repositories.BrawlerRepository;
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController
 @RequestMapping("/brawl")

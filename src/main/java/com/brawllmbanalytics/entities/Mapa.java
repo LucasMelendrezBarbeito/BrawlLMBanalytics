@@ -1,6 +1,11 @@
 package com.brawllmbanalytics.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "mapas")
@@ -8,30 +13,30 @@ public class Mapa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;   
+    private Long id;
     @Column(name = "supercell_id", unique = true)
-    private Long supercellId;  
+    private Long supercellId;
 
     @Column(nullable = false)
     private String nombre;
 
     @Column(nullable = true)
-    private String modo;  
+    private String modo;
 
     @Column(nullable = true)
-    private String imagenUrl;  
+    private String imagenUrl;
 
     @Column(name = "en_rotacion")
     private boolean enRotacion = false;
 
-    
-    public Mapa() {}
-
-    
+    public Mapa() {
+        // necesario para JPA
+    }
 
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -39,6 +44,7 @@ public class Mapa {
     public Long getSupercellId() {
         return supercellId;
     }
+
     public void setSupercellId(Long supercellId) {
         this.supercellId = supercellId;
     }
@@ -46,6 +52,7 @@ public class Mapa {
     public String getNombre() {
         return nombre;
     }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -53,6 +60,7 @@ public class Mapa {
     public String getModo() {
         return modo;
     }
+
     public void setModo(String modo) {
         this.modo = modo;
     }
@@ -60,6 +68,7 @@ public class Mapa {
     public String getImagenUrl() {
         return imagenUrl;
     }
+
     public void setImagenUrl(String imagenUrl) {
         this.imagenUrl = imagenUrl;
     }
@@ -67,6 +76,7 @@ public class Mapa {
     public boolean isEnRotacion() {
         return enRotacion;
     }
+
     public void setEnRotacion(boolean enRotacion) {
         this.enRotacion = enRotacion;
     }
