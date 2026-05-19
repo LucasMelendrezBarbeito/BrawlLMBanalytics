@@ -56,8 +56,6 @@ Gestionado con **Maven**, el proyecto utiliza las siguientes librerías core:
 ---
 
 ### Build (Instalación)
-> [!IMPORTANT] 
-> Debes generar tu token y registrar tu IP en el [Portal deDesarrolladores de Supercell](https://developer.brawlstars.com/).
 
 
 1. **Clonar el repositorio:**
