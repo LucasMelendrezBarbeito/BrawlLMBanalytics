@@ -60,7 +60,7 @@ public class TierlistItem {
     }
 
     public TierlistItem() {
-
+        // Constructor vacío para JPA
     }
 
     public TierlistItem(String tier, Tierlist tierlist, Brawler brawler) {
