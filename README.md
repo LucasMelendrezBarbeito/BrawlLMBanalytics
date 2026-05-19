@@ -56,6 +56,9 @@ Gestionado con **Maven**, el proyecto utiliza las siguientes librerías core:
 ---
 
 ### Build (Instalación)
+> [!IMPORTANT] 
+> Debes generar tu token y registrar tu IP en el [Portal deDesarrolladores de Supercell](https://developer.brawlstars.com/).
+
 
 1. **Clonar el repositorio:**
    ```bash
@@ -68,9 +71,6 @@ Gestionado con **Maven**, el proyecto utiliza las siguientes librerías core:
    spring.datasource.url=jdbc:mysql://localhost:3306/nombre_tu_db
    brawl.api.token=Bearer TU_TOKEN_AQUI
    ```
-   > [!IMPORTANT] 
-   > Debes generar tu token y registrar tu IP en el [Portal deDesarrolladores de Supercell](https://developer.brawlstars.com/).
-
 3. **Ejecución del proyecto:**
    ```bash
    mvn spring-boot:run
