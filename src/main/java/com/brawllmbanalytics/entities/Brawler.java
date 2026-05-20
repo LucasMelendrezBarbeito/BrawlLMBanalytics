@@ -6,9 +6,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.PostLoad;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "brawlers")
@@ -70,14 +68,6 @@ public class Brawler {
         this.starPowers = starPowers;
     }
 
-    public String getIconUrl() {
-        return iconUrl;
-    }
-
-    public void setIconUrl(String iconUrl) {
-        this.iconUrl = iconUrl;
-    }
-
     public Brawler() {
         // Constructor vacío requerido por JPA / Hibernate
     }
@@ -94,13 +84,5 @@ public class Brawler {
 
     @OneToMany(mappedBy = "brawler", cascade = CascadeType.ALL)
     private List<StarPower> starPowers;
-
-    @Transient
-    private String iconUrl;
-
-    @PostLoad
-    public void generarIconUrl() {
-        this.iconUrl = "https://cdn.brawlify.com/brawlers/borderless/" + this.id + ".png";
-    }
 
 }
