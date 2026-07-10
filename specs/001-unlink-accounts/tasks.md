@@ -38,10 +38,10 @@ No se requieren tareas fundacionales adicionales. El endpoint de vinculación (`
 
 ### Implementation for User Story 1
 
-- [ ] T001 [US1] Añadir método `eliminarCuenta(Long cuentaId, Integer usuarioId)` en `src/main/java/com/brawllmbanalytics/services/CuentaBrawlService.java` — busca la cuenta, valida pertenencia (anti-IDOR), elimina con `repository.deleteById()`
-- [ ] T002 [US1] Añadir endpoint `DELETE /cuentas/{id}` en `src/main/java/com/brawllmbanalytics/controllers/CuentaBrawlController.java` — obtiene usuario del token, delega al service, retorna 204/403/404
-- [ ] T003 [US1] Añadir función `eliminarCuenta(id)` en `src/main/resources/static/js/auth.js` — muestra `confirm()`, envía `DELETE` con `Authorization: Bearer <token>`, recarga lista con `cargarCuentasVinculadas()`
-- [ ] T004 [US1] Añadir botón "Eliminar" en la tarjeta de cuenta dentro de `cargarCuentasVinculadas()` en `src/main/resources/static/js/auth.js` — botón con clase `btn btn-sm btn-danger`, llama `eliminarCuenta(c.id)`
+- [x] T001 [US1] Añadir método `eliminarCuenta(Long cuentaId, Integer usuarioId)` en `src/main/java/com/brawllmbanalytics/services/CuentaBrawlService.java` — busca la cuenta, valida pertenencia (anti-IDOR), elimina con `repository.deleteById()`
+- [x] T002 [US1] Añadir endpoint `DELETE /cuentas/{id}` en `src/main/java/com/brawllmbanalytics/controllers/CuentaBrawlController.java` — obtiene usuario del token, delega al service, retorna 204/403/404
+- [x] T003 [US1] Añadir función `eliminarCuenta(id)` en `src/main/resources/static/js/auth.js` — muestra `confirm()`, envía `DELETE` con `Authorization: Bearer <token>`, recarga lista con `cargarCuentasVinculadas()`
+- [x] T004 [US1] Añadir botón "Eliminar" en la tarjeta de cuenta dentro de `cargarCuentasVinculadas()` en `src/main/resources/static/js/auth.js` — botón con clase `btn btn-sm btn-danger`, llama `eliminarCuenta(c.id)`
 
 **Checkpoint**: El usuario puede eliminar cuentas vinculadas desde la UI. La eliminación es verificada por el backend (anti-IDOR).
 
@@ -55,8 +55,8 @@ No se requieren tareas fundacionales adicionales. El endpoint de vinculación (`
 
 ### Implementation for User Story 2
 
-- [ ] T005 [US2] Añadir feedback de éxito/error en `eliminarCuenta()` en `src/main/resources/static/js/auth.js` — si `res.ok`: mostrar alert de éxito y recargar lista; si no: mostrar mensaje de error con `res.status`
-- [ ] T006 [US2] Manejar caso de cuenta ya eliminada (404) en `src/main/resources/static/js/auth.js` — si 404: mostrar "La cuenta ya no existe" y recargar lista
+- [x] T005 [US2] Añadir feedback de éxito/error en `eliminarCuenta()` en `src/main/resources/static/js/auth.js` — si `res.ok`: mostrar alert de éxito y recargar lista; si no: mostrar mensaje de error con `res.status`
+- [x] T006 [US2] Manejar caso de cuenta ya eliminada (404) en `src/main/resources/static/js/auth.js` — si 404: mostrar "La cuenta ya no existe" y recargar lista
 
 **Checkpoint**: El usuario recibe feedback claro tras cada acción. Los errores se manejan gracefully.
 
@@ -66,8 +66,8 @@ No se requieren tareas fundacionales adicionales. El endpoint de vinculación (`
 
 **Purpose**: Verificación final y validación.
 
-- [ ] T007 Ejecutar validación de `quickstart.md` — probar los 5 escenarios documentados
-- [ ] T008 Verificar que no hay violaciones a la constitution (anti-IDOR, DTOs, arquitectura en capas)
+- [x] T007 Ejecutar validación de `quickstart.md` — probar los 5 escenarios documentados
+- [x] T008 Verificar que no hay violaciones a la constitution (anti-IDOR, DTOs, arquitectura en capas)
 
 ---
 

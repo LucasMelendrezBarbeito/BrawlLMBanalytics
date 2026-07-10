@@ -137,7 +137,10 @@ async function cargarCuentasVinculadas(cuentasContainer) {
                     <h3>${c.nombre}</h3>
                     <p class="tag">${c.tag}</p>
                     <p class="trophies">Trofeos: ${c.trofeos}</p>
-                    <button class="btn btn-sm" onclick="verEstadisticasDesdeCuenta('${tagSinAlmohadilla}')">Ver estadísticas</button>
+                    <div style="display:flex; gap:10px; margin-top:1rem;">
+                        <button class="btn btn-sm" onclick="verEstadisticasDesdeCuenta('${tagSinAlmohadilla}')">Ver estadísticas</button>
+                        <button class="btn btn-sm btn-danger" onclick="eliminarCuenta(${c.id})">Eliminar</button>
+                    </div>
                 </div>`;
         });
         cuentasContainer.innerHTML = html;
@@ -149,6 +152,33 @@ async function cargarCuentasVinculadas(cuentasContainer) {
 
 function verEstadisticasDesdeCuenta(tagSinAlmohadilla) {
     window.location.href = `estadisticas.html?tag=${encodeURIComponent(tagSinAlmohadilla)}`;
+}
+
+async function eliminarCuenta(cuentaId) {
+    if (!confirm("¿Estás seguro de que quieres eliminar esta cuenta?")) return;
+    const token = localStorage.getItem("token");
+    if (!token) { alert("Debes iniciar sesión."); return; }
+    try {
+        const res = await fetch(`${API_BASE}/cuentas/${cuentaId}`, {
+            method: "DELETE",
+            headers: { "Authorization": `Bearer ${token}` },
+            credentials: 'include'
+        });
+        if (res.ok) {
+            alert("Cuenta eliminada correctamente.");
+            cargarCuentasVinculadas(document.getElementById("cuentasContainer"));
+        } else if (res.status === 404) {
+            alert("La cuenta ya no existe.");
+            cargarCuentasVinculadas(document.getElementById("cuentasContainer"));
+        } else if (res.status === 403) {
+            alert("No tienes permiso para eliminar esta cuenta.");
+        } else {
+            alert("Error al eliminar la cuenta.");
+        }
+    } catch (err) {
+        console.error("Error eliminando cuenta:", err);
+        alert("Error inesperado al eliminar la cuenta.");
+    }
 }
 
 async function inicializarPaginaEstadisticas(statsContainer) {
