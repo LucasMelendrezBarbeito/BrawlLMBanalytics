@@ -50,6 +50,13 @@ public class CuentaBrawlController {
         return cuentaBrawlRepository.findByUsuarioId(user.getId());
     }
 
+    @DeleteMapping("/{id}")
+    public void eliminar(@PathVariable Integer id,
+                         @RequestHeader("Authorization") String tokenHeader) {
+        Usuario user = usuarioDesdeToken(tokenHeader);
+        cuentaBrawlService.eliminarCuenta(id, user.getId());
+    }
+
     private Usuario usuarioDesdeToken(String tokenHeader) {
         String token = tokenHeader.replace("Bearer ", "");
         String username = jwtUtil.extractUsername(token);

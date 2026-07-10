@@ -19,13 +19,18 @@ public class UsuarioService {
     private PasswordEncoder passwordEncoder;
 
     public Usuario registrar(RegisterRequest request) {
+        if (usuarioRepository.findByUsername(request.username()).isPresent()) {
+            throw new RuntimeException("El nombre de usuario ya está en uso");
+        }
+        if (usuarioRepository.findByEmail(request.email()).isPresent()) {
+            throw new RuntimeException("El email ya está registrado");
+        }
+
         Usuario u = new Usuario();
         u.setUsername(request.username());
         u.setEmail(request.email());
         u.setPassword(passwordEncoder.encode(request.password()));
-
-        
-        u.setRol("USER");   // más adelante podremos crear admins a mano o con otra lógica
+        u.setRol("USER");
 
         return usuarioRepository.save(u);
     }

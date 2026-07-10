@@ -41,4 +41,15 @@ public class CuentaBrawlService {
 
         return cuentaRepo.save(c);
     }
+
+    public void eliminarCuenta(Integer cuentaId, Integer usuarioId) {
+        CuentaBrawl cuenta = cuentaRepo.findById(cuentaId)
+                .orElseThrow(() -> new RuntimeException("Cuenta no encontrada"));
+
+        if (!cuenta.getUsuario().getId().equals(usuarioId)) {
+            throw new RuntimeException("No tienes permiso para eliminar esta cuenta");
+        }
+
+        cuentaRepo.deleteById(cuentaId);
+    }
 }

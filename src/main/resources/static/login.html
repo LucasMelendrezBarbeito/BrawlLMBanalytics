@@ -2,190 +2,61 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Login - BrawlLMB Analytics</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login &mdash; BrawlLMB Analytics</title>
     <link rel="icon" href="/favicon_kenji.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #0f0f0f, #1a1a1a 40%, #202020);
-            color: #fff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .bg-logo {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            width: 600px;
-            height: 600px;
-            transform: translate(-50%, -50%);
-            opacity: 0.06;
-            background: url('images/logo_lmb.png') center/contain no-repeat;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        header {
-            background: rgba(20, 20, 20, 0.85);
-            padding: 18px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid rgba(255,255,255,0.07);
-            backdrop-filter: blur(6px);
-            z-index: 2;
-        }
-
-        .logo-box {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-box img {
-            width: 42px;
-            height: 42px;
-        }
-
-        .logo-box h1 {
-            margin: 0;
-            font-size: 28px;
-            font-weight: 700;
-        }
-
-        nav a {
-            margin-left: 25px;
-            color: #ddd;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            color: #4da3ff;
-        }
-
-        /* MAIN */
-        main {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 2;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .glass-box {
-            background: rgba(255,255,255,0.05);
-            padding: 40px;
-            border-radius: 16px;
-            width: 380px;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 4px 25px rgba(0,0,0,0.3);
-        }
-
-        h2 {
-            margin-bottom: 20px;
-            font-size: 28px;
-        }
-
-        form label {
-            display: block;
-            margin-top: 12px;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        form input {
-            width: 100%;
-            padding: 12px;
-            margin-top: 6px;
-            border-radius: 8px;
-            border: none;
-            background: #222;
-            color: white;
-            outline: none;
-            font-size: 15px;
-        }
-
-        .btn {
-            width: 100%;
-            background: #4da3ff;
-            padding: 12px;
-            margin-top: 25px;
-            border-radius: 8px;
-            border: none;
-            color: white;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn:hover {
-            background: #1f8aff;
-            transform: translateY(-2px);
-        }
-
-        p a {
-            color: #4da3ff;
-            text-decoration: none;
-        }
-
-        footer {
-            text-align: center;
-            padding: 12px;
-            font-size: 14px;
-            opacity: 0.6;
-        }
-    </style>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
-<div class="bg-logo"></div>
+<div class="bg-grid"></div>
 
 <header>
-    <div class="logo-box">
-        <img src="images/logo_lmb.png" alt="logo">
-        <h1>BrawlLMB Analytics</h1>
-    </div>
-
-    <nav>
+    <a class="logo-box" href="index.html">
+        <img src="images/logo.svg" alt="BrawlLMB">
+        <h1>BrawlLMB</h1>
+    </a>
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+    <nav id="mainNav">
         <a href="index.html">Inicio</a>
-        <a href="login.html">Login</a>
+        <a href="login.html" class="activo">Login</a>
         <a href="register.html">Registro</a>
     </nav>
 </header>
 
-<main>
-    <div class="glass-box">
-        <h2>Iniciar Sesión</h2>
+<main style="display:flex; justify-content:center; align-items:center; min-height:calc(100vh - 64px - 60px);">
+    <div class="glass-static" style="padding:2.5rem; width:100%; max-width:420px;">
+        <h2 class="text-center mb-3" style="font-size:1.5rem;">Iniciar Sesi&oacute;n</h2>
 
         <form id="loginForm">
-            <label>Usuario</label>
-            <input type="text" id="username" required>
+            <div class="form-group">
+                <label for="username">Usuario</label>
+                <input type="text" id="username" class="form-input" required autocomplete="username">
+            </div>
 
-            <label>Contraseña</label>
-            <input type="password" id="password" required>
+            <div class="form-group">
+                <label for="password">Contrase&ntilde;a</label>
+                <input type="password" id="password" class="form-input" required autocomplete="current-password">
+            </div>
 
-            <button type="submit" class="btn">Entrar</button>
+            <button type="submit" class="btn w-full mt-3">Entrar</button>
         </form>
 
-        <p>¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
+        <p class="text-center mt-3" style="font-size:0.82rem; color:var(--text-muted);">
+            &iquest;No tienes cuenta? <a href="register.html" style="color:var(--accent-light); text-decoration:none;">Reg&iacute;strate</a>
+        </p>
     </div>
 </main>
 
 <footer>
-    © 2025 BrawlLMB Analytics — Todos los derechos reservados.
+    &copy; 2025 BrawlLMB Analytics &mdash; Todos los derechos reservados.
 </footer>
 
 <script src="js/auth.js"></script>
+<script>
+function toggleMenu() {
+    document.getElementById('mainNav').classList.toggle('open');
+}
+</script>
 </body>
 </html>

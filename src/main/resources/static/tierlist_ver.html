@@ -2,300 +2,129 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ver Tierlist - BrawlLMB Analytics</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Tierlist &mdash; BrawlLMB Analytics</title>
     <link rel="icon" href="/favicon_kenji.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #0f0f0f, #1a1a1a 40%, #202020);
-            color: #fff;
-            overflow-x: hidden;
-        }
-
-        .bg-logo {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            width: 600px;
-            height: 600px;
-            transform: translate(-50%, -50%);
-            opacity: 0.06;
-            background: url('images/logo_lmb.png') center/contain no-repeat;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        header {
-            background: rgba(20,20,20,0.85);
-            padding: 18px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            box-shadow: 0 2px 12px rgba(0,0,0,0.4);
-            backdrop-filter: blur(6px);
-            position: relative;
-            z-index: 10;
-        }
-
-        .logo-box {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .logo-box img { width: 42px; height: 42px; }
-
-        nav a {
-            margin-left: 25px;
-            color: #ccc;
-            text-decoration: none;
-            font-weight: 500;
-            transition: .25s;
-        }
-        nav a:hover, nav a.activo { color: #4da3ff; }
-
-        main {
-            max-width: 1400px;
-            margin: 40px auto;
-            padding: 0 40px;
-            position: relative;
-            z-index: 2;
-        }
-
-        h2 { font-size: 32px; margin-bottom: 20px; text-align: center; }
-        h3 { font-size: 22px; margin-top: 25px; }
-
-        .tier-row {
-            display: flex;
-            background: rgba(255,255,255,0.06);
-            padding: 12px;
-            border-radius: 12px;
-            min-height: 90px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .tier-label {
-            width: 70px;
-            padding: 12px 0;
-            font-size: 26px;
-            font-weight: 700;
-            text-align: center;
-            border-radius: 10px;
-            margin-right: 15px;
-        }
-
-        .tier-S { background: #ff4d4d; }
-        .tier-A { background: #ff8c42; }
-        .tier-B { background: #ffc93c; color: black; }
-        .tier-C { background: #62e062; color: black; }
-        .tier-D { background: #4d79ff; }
-
-        .tier-dropzone-view {
-            flex: 1;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            min-height: 70px;
-            background: rgba(0,0,0,0.35);
-            padding: 12px;
-            border-radius: 10px;
-        }
-
-        .brawler-icon {
-            width: 55px;
-            height: 55px;
-            border-radius: 6px;
-        }
-
-        textarea {
-            width: 100%;
-            background: #222;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            padding: 12px;
-            margin-top: 10px;
-            resize: vertical;
-        }
-
-        .btn {
-            margin-top: 15px;
-            padding: 12px 22px;
-            font-size: 18px;
-            font-weight: 600;
-            border: none;
-            border-radius: 10px;
-            background: #4da3ff;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background: #1c7ed6;
-            transform: translateY(-2px);
-        }
-
-        .rating-box {
-            display: flex;
-            gap: 8px;
-            margin-top: 10px;
-            font-size: 32px;
-            cursor: pointer;
-        }
-
-        .star {
-            color: #555;
-            transition: 0.25s;
-        }
-
-        .star:hover,
-        .star.active {
-            color: #ffcc00;
-            transform: scale(1.15);
-        }
-
-        .review-card {
-            background: rgba(255,255,255,0.1);
-            padding: 14px;
-            border-radius: 12px;
-            margin-bottom: 14px;
-            border: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .review-stars {
-            font-size: 22px;
-            color: #ffcc00;
-            margin-bottom: 6px;
-        }
-
-        .review-user {
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .review-comment {
-            color: #ddd;
-        }
-    </style>
-
-    <script src="js/auth.js" defer></script>
+    <link rel="stylesheet" href="css/main.css">
 </head>
-
 <body>
 
-<div class="bg-logo"></div>
+<div class="bg-grid"></div>
 
 <header>
-    <div class="logo-box">
-        <img src="images/logo_lmb.png" alt="logo">
-        <h1>BrawlLMB Analytics</h1>
-    </div>
-
-    <nav>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="cuenta.html">Mi Cuenta Brawl</a>
-        <a href="estadisticas.html">Estadísticas</a>
+    <a class="logo-box" href="dashboard.html">
+        <img src="images/logo.svg" alt="BrawlLMB">
+        <h1>BrawlLMB</h1>
+    </a>
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+    <nav id="mainNav">
+        <a href="cuenta.html">Mi Cuenta</a>
+        <a href="estadisticas.html">Estad&iacute;sticas</a>
         <a href="mapas.html">Mapas</a>
         <a href="tierlist.html" class="activo">Tierlists</a>
-        <a href="cuentas.html">Cuentas vinculadas</a>
-        <a href="#" onclick="logout()">Cerrar Sesión</a>
+        <a href="#" onclick="event.preventDefault(); logout();">Salir</a>
     </nav>
 </header>
 
 <main>
-
-    <h2 id="tituloTierlist"></h2>
-
-    <h3>Brawlers del Tierlist</h3>
-
-    <div class="tier-row">
-        <div class="tier-label tier-S">S</div>
-        <div id="tier-S" class="tier-dropzone-view"></div>
+    <div class="page-header">
+        <h2 id="tituloTierlist" class="section-title"></h2>
     </div>
 
-    <div class="tier-row">
-        <div class="tier-label tier-A">A</div>
-        <div id="tier-A" class="tier-dropzone-view"></div>
+    <h3 style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1rem; text-transform:uppercase; letter-spacing:1px;">Brawlers del Tierlist</h3>
+
+    <div class="tier-section">
+        <div class="tier-row glass-static">
+            <div class="tier-badge tier-S">S</div>
+            <div id="tier-S" class="tier-dropzone-view"></div>
+        </div>
+        <div class="tier-row glass-static">
+            <div class="tier-badge tier-A">A</div>
+            <div id="tier-A" class="tier-dropzone-view"></div>
+        </div>
+        <div class="tier-row glass-static">
+            <div class="tier-badge tier-B">B</div>
+            <div id="tier-B" class="tier-dropzone-view"></div>
+        </div>
+        <div class="tier-row glass-static">
+            <div class="tier-badge tier-C">C</div>
+            <div id="tier-C" class="tier-dropzone-view"></div>
+        </div>
+        <div class="tier-row glass-static">
+            <div class="tier-badge tier-D">D</div>
+            <div id="tier-D" class="tier-dropzone-view"></div>
+        </div>
     </div>
 
-    <div class="tier-row">
-        <div class="tier-label tier-B">B</div>
-        <div id="tier-B" class="tier-dropzone-view"></div>
+    <div class="divider"></div>
+
+    <div class="glass-static" style="padding:2rem; max-width:700px; margin:0 auto;">
+        <h3 style="margin-bottom:1rem;">Dejar una rese&ntilde;a</h3>
+        <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem;">Punt&uacute;a esta tierlist</p>
+
+        <div id="rating" class="rating-selector">
+            <span class="rating-pip" data-value="1">1</span>
+            <span class="rating-pip" data-value="2">2</span>
+            <span class="rating-pip" data-value="3">3</span>
+            <span class="rating-pip" data-value="4">4</span>
+            <span class="rating-pip" data-value="5">5</span>
+        </div>
+
+        <textarea id="comentario" class="form-input mt-2" rows="3" placeholder="Escribe tu comentario..." style="resize:vertical;"></textarea>
+        <button class="btn mt-2" onclick="enviarReview()">Enviar rese&ntilde;a</button>
     </div>
 
-    <div class="tier-row">
-        <div class="tier-label tier-C">C</div>
-        <div id="tier-C" class="tier-dropzone-view"></div>
-    </div>
+    <div class="divider"></div>
 
-    <div class="tier-row">
-        <div class="tier-label tier-D">D</div>
-        <div id="tier-D" class="tier-dropzone-view"></div>
-    </div>
-
-    <h3>Dejar una reseña</h3>
-
-    <h4>Puntúa esta tierlist</h4>
-    <div id="rating" class="rating-box">
-        <span class="star" data-value="1">★</span>
-        <span class="star" data-value="2">★</span>
-        <span class="star" data-value="3">★</span>
-        <span class="star" data-value="4">★</span>
-        <span class="star" data-value="5">★</span>
-    </div>
-
-    <textarea id="comentario" rows="3" placeholder="Escribe tu comentario..."></textarea>
-    <button class="btn" onclick="enviarReview()">Enviar</button>
-
-    <h3>Reseñas</h3>
+    <h3 style="margin-bottom:1rem;">Rese&ntilde;as</h3>
     <div id="reviewsContainer"></div>
-
 </main>
+
+<footer>
+    &copy; 2025 BrawlLMB Analytics &mdash; Todos los derechos reservados.
+</footer>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     cargarTierlist();
-    inicializarEstrellas();
+    inicializarRating();
 });
 
-const API_BASE = "http://localhost:8080";
+const API_BASE = "";
 let puntuacionSeleccionada = 0;
 
-function inicializarEstrellas() {
-    const estrellas = document.querySelectorAll(".star");
-
-    estrellas.forEach(star => {
-        star.addEventListener("mouseover", () => pintarEstrellas(star.dataset.value));
-        star.addEventListener("click", () => {
-            puntuacionSeleccionada = star.dataset.value;
-            pintarEstrellas(puntuacionSeleccionada);
-        });
-    });
-
-    document.getElementById("rating").addEventListener("mouseleave", () => {
-        pintarEstrellas(puntuacionSeleccionada);
-    });
+function toggleMenu() {
+    document.getElementById('mainNav').classList.toggle('open');
 }
 
-function pintarEstrellas(num) {
-    const estrellas = document.querySelectorAll(".star");
-    estrellas.forEach(star => {
-        star.classList.remove("active");
-        if (parseInt(star.dataset.value) <= num) {
-            star.classList.add("active");
-        }
+async function logout() {
+    try { await fetch(`${API_BASE}/auth/logout`, { method: "POST", credentials: 'include' }); }
+    catch (e) { console.error("Error during logout:", e); }
+    localStorage.clear();
+    window.location.href = "login.html";
+}
+
+function inicializarRating() {
+    const pips = document.querySelectorAll(".rating-pip");
+    pips.forEach(pip => {
+        pip.addEventListener("mouseover", () => resaltarPips(pip.dataset.value));
+        pip.addEventListener("click", () => {
+            puntuacionSeleccionada = parseInt(pip.dataset.value);
+            resaltarPips(puntuacionSeleccionada);
+        });
+    });
+    document.getElementById("rating").addEventListener("mouseleave", () => resaltarPips(puntuacionSeleccionada));
+}
+
+function resaltarPips(num) {
+    document.querySelectorAll(".rating-pip").forEach(pip => {
+        pip.classList.toggle("active", parseInt(pip.dataset.value) <= num);
     });
 }
 
 async function cargarTierlist() {
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
-
     const res = await fetch(`${API_BASE}/tierlists/${id}`);
     const t = await res.json();
 
@@ -318,74 +147,61 @@ async function cargarTierlist() {
     cargarResenas(t);
 }
 
-// Escapa HTML para evitar XSS al inyectar datos de usuario via innerHTML
 function escapeHtml(str) {
-    return String(str)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
+    return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
 }
 
 function cargarResenas(t) {
-    const contReviews = document.getElementById("reviewsContainer");
-    contReviews.innerHTML = "";
+    const cont = document.getElementById("reviewsContainer");
+    cont.innerHTML = "";
 
     if (t.reviews?.length) {
         t.reviews.forEach(r => {
             const p = Math.max(0, Math.min(5, parseInt(r.puntuacion) || 0));
-            const estrellas = "★".repeat(p) + "☆".repeat(5 - p);
+            let pips = "";
+            for (let i = 1; i <= 5; i++) {
+                pips += `<span class="pip${i <= p ? ' filled' : ''}"></span>`;
+            }
             const usuario = escapeHtml(r.usuario?.username ?? "Usuario");
             const comentario = escapeHtml(r.comentario ?? "");
-
-            contReviews.innerHTML += `
-                <div class="review-card">
-                    <div class="review-stars">${estrellas}</div>
-                    <div class="review-user">${usuario}</div>
+            cont.innerHTML += `
+                <div class="review-card glass-static">
+                    <div class="review-header">
+                        <span class="review-user">${usuario}</span>
+                        <div class="review-score">${pips}</div>
+                    </div>
                     <div class="review-comment">${comentario}</div>
-                </div>
-            `;
+                </div>`;
         });
     } else {
-        contReviews.innerHTML = "<p>No hay reseñas aún.</p>";
+        cont.innerHTML = '<div class="empty-state"><p>No hay rese&ntilde;as a&uacute;n.</p></div>';
     }
 }
 
 async function enviarReview() {
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
-
     const comentario = document.getElementById("comentario").value.trim();
     const token = localStorage.getItem("token");
 
-    if (!token) return alert("Debes iniciar sesión para dejar una reseña.");
+    if (!token) return alert("Debes iniciar sesi&oacute;n.");
     if (!comentario) return alert("Escribe un comentario.");
-    if (puntuacionSeleccionada == 0) return alert("Selecciona una puntuación en estrellas.");
+    if (puntuacionSeleccionada == 0) return alert("Selecciona una puntuaci&oacute;n.");
 
-    // El usuarioId ya no se envía: el backend lo deriva del token (anti-IDOR).
     const url = `${API_BASE}/tierlists/${id}/review?comentario=${encodeURIComponent(comentario)}&puntuacion=${puntuacionSeleccionada}`;
-
-    const resp = await fetch(url, {
-        method: "POST",
-        headers: { "Authorization": `Bearer ${token}` }
-    });
+    const resp = await fetch(url, { method: "POST", headers: { "Authorization": `Bearer ${token}` } });
 
     if (!resp.ok) {
-        alert(resp.status === 401 || resp.status === 403
-            ? "Debes iniciar sesión para dejar una reseña."
-            : "No se pudo enviar la reseña.");
+        alert(resp.status === 401 || resp.status === 403 ? "Debes iniciar sesi&oacute;n." : "No se pudo enviar la rese&ntilde;a.");
         return;
     }
 
-    alert("¡Reseña enviada!");
+    alert("Rese&ntilde;a enviada");
     document.getElementById("comentario").value = "";
     puntuacionSeleccionada = 0;
-    pintarEstrellas(0);
-
+    resaltarPips(0);
     cargarTierlist();
 }
 </script>
-
 </body>
 </html>
