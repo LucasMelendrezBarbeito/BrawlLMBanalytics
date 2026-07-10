@@ -77,7 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            localStorage.setItem("token",    result.token);
             localStorage.setItem("userId",   result.userId);
             localStorage.setItem("username", result.username);
 
@@ -134,10 +133,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             btnVincular.addEventListener("click", async () => {
 
-                const token  = localStorage.getItem("token");
                 const userId = localStorage.getItem("userId");
 
-                if (!token || !userId) {
+                if (!userId) {
                     alert("Debes iniciar sesión.");
                     return;
                 }
@@ -152,9 +150,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 const resV = await fetch(`${API_BASE}/cuentas/vincular`, {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`
+                        "Content-Type": "application/json"
                     },
+                    credentials: 'include',
                     body: JSON.stringify(body)
                 });
 
@@ -192,7 +190,15 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-function logout() {
+async function logout() {
+    try {
+        await fetch(`${API_BASE}/auth/logout`, {
+            method: "POST",
+            credentials: 'include'
+        });
+    } catch (e) {
+        console.error("Error during logout:", e);
+    }
     localStorage.clear();
     window.location.href = "login.html";
 }
@@ -210,9 +216,7 @@ async function cargarCuentasVinculadas(cuentasContainer) {
 
     try {
         const res = await fetch(`${API_BASE}/cuentas/mias`, {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
+            credentials: 'include'
         });
 
         if (!res.ok) {
@@ -620,11 +624,8 @@ async function cargarTopBrawlersMapa(mapaId, origen) {
     topContainer.innerHTML = "<p>Cargando mejores brawlers...</p>";
 
     try {
-        const token = localStorage.getItem("token");
-        const headers = token ? { "Authorization": `Bearer ${token}` } : {};
-
         const res = await fetch(`${API_BASE}/mapas/${mapaId}/top-brawlers`, {
-            headers
+            credentials: 'include'
         });
 
         if (!res.ok) {

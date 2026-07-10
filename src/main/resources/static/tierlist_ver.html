@@ -318,19 +318,32 @@ async function cargarTierlist() {
     cargarResenas(t);
 }
 
+// Escapa HTML para evitar XSS al inyectar datos de usuario via innerHTML
+function escapeHtml(str) {
+    return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
+
 function cargarResenas(t) {
     const contReviews = document.getElementById("reviewsContainer");
     contReviews.innerHTML = "";
 
     if (t.reviews?.length) {
         t.reviews.forEach(r => {
-            const estrellas = "★".repeat(r.puntuacion ?? 0) + "☆".repeat(5 - (r.puntuacion ?? 0));
+            const p = Math.max(0, Math.min(5, parseInt(r.puntuacion) || 0));
+            const estrellas = "★".repeat(p) + "☆".repeat(5 - p);
+            const usuario = escapeHtml(r.usuario?.username ?? "Usuario");
+            const comentario = escapeHtml(r.comentario ?? "");
 
             contReviews.innerHTML += `
                 <div class="review-card">
                     <div class="review-stars">${estrellas}</div>
-                    <div class="review-user">${r.usuario?.username ?? "Usuario"}</div>
-                    <div class="review-comment">${r.comentario}</div>
+                    <div class="review-user">${usuario}</div>
+                    <div class="review-comment">${comentario}</div>
                 </div>
             `;
         });
