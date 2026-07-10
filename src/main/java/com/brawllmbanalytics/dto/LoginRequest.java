@@ -1,8 +1,9 @@
 package com.brawllmbanalytics.dto;
 
+import jakarta.validation.constraints.NotBlank;
 
 public record LoginRequest(
-    String username,
-    String password
+    @NotBlank String username,
+    @NotBlank String password
 ) {
 }

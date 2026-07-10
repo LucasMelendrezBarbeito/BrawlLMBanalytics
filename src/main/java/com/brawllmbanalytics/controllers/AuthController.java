@@ -6,6 +6,7 @@ import com.brawllmbanalytics.dto.RegisterRequest;
 import com.brawllmbanalytics.entities.Usuario;
 import com.brawllmbanalytics.security.JwtUtil;
 import com.brawllmbanalytics.services.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
@@ -27,12 +28,12 @@ public class AuthController {
     private JwtUtil jwtUtil;
 
     @PostMapping("/register")
-    public Usuario register(@RequestBody RegisterRequest request) {
+    public Usuario register(@Valid @RequestBody RegisterRequest request) {
         return usuarioService.registrar(request);
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody LoginRequest request) {
+    public AuthResponse login(@Valid @RequestBody LoginRequest request) {
 
         Authentication auth = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

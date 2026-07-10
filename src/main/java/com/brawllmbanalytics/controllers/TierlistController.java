@@ -23,6 +23,8 @@ import com.brawllmbanalytics.repositories.UsuarioRepository;
 import com.brawllmbanalytics.security.JwtUtil;
 import com.brawllmbanalytics.services.TierlistService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/tierlists")
 public class TierlistController {
@@ -52,7 +54,7 @@ public class TierlistController {
     @PostMapping("/{id}/agregar-item")
     public TierlistItem agregarItem(
             @PathVariable Integer id,
-            @RequestBody AgregarItemTierlistRequest req) {
+            @Valid @RequestBody AgregarItemTierlistRequest req) {
 
         return tierlistService.agregarItem(id, req.brawlerId(), req.tier());
     }

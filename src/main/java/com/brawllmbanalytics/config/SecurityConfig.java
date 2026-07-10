@@ -69,6 +69,10 @@ public class SecurityConfig {
            
                 .requestMatchers("/auth/login", "/auth/register").permitAll()
 
+                // Permite renderizar /error con su status real (si no, el dispatch
+                // interno de error cae en anyRequest().authenticated() y devuelve 403)
+                .requestMatchers("/error").permitAll()
+
           
                 .requestMatchers(HttpMethod.GET, "/brawl/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/mapas/**").permitAll()

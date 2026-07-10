@@ -7,6 +7,7 @@ import com.brawllmbanalytics.repositories.CuentaBrawlRepository;
 import com.brawllmbanalytics.repositories.UsuarioRepository;
 import com.brawllmbanalytics.security.JwtUtil;
 import com.brawllmbanalytics.services.CuentaBrawlService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,7 @@ public class CuentaBrawlController {
     private UsuarioRepository usuarioRepository;
 
     @PostMapping("/vincular")
-    public CuentaBrawl vincular(@RequestBody VincularCuentaRequest req,
+    public CuentaBrawl vincular(@Valid @RequestBody VincularCuentaRequest req,
                                 @RequestHeader("Authorization") String tokenHeader) {
         Usuario user = usuarioDesdeToken(tokenHeader);
         return cuentaBrawlService.vincularCuenta(

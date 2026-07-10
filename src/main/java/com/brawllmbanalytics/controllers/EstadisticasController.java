@@ -6,6 +6,7 @@ import com.brawllmbanalytics.entities.Usuario;
 import com.brawllmbanalytics.repositories.UsuarioRepository;
 import com.brawllmbanalytics.security.JwtUtil;
 import com.brawllmbanalytics.services.EstadisticasService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class EstadisticasController {
     private UsuarioRepository usuarioRepository;
 
     @PostMapping
-    public EstadisticaBrawlerUsuario guardar(@RequestBody GuardarEstadisticaRequest req,
+    public EstadisticaBrawlerUsuario guardar(@Valid @RequestBody GuardarEstadisticaRequest req,
                                              @RequestHeader("Authorization") String tokenHeader) {
         String token = tokenHeader.replace("Bearer ", "");
         String username = jwtUtil.extractUsername(token);
