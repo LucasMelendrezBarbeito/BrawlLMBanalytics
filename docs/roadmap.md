@@ -71,6 +71,10 @@ Leyenda: ✅ hecho · 🔸 parcial · ⬜ pendiente
 
 ## Notas
 
+- **Tests**: suite de integración de seguridad con H2 en memoria
+  (`SeguridadIntegrationTest`, perfil `test`), sin dependencia de MySQL ni
+  variables de entorno. `mvnw test` → 8 tests. Commit `d3fd5f1`.
+
 - **Excepciones tipadas (refactor recomendado)**: los `RuntimeException` de negocio
   ("... no encontrado", "cuenta ya vinculada") caen al 500 genérico del handler global.
   Introducir excepciones tipadas (`NoEncontradoException` → 404, etc.) daría status y
