@@ -189,8 +189,8 @@ function pintarEstadisticasJugador(container, data) {
     const brawlers        = data.brawlers ?? [];
     const iconId = data.icon?.id ?? null;
     const avatarUrl = iconId
-        ? `https://cdn.brawlify.com/profile/${iconId}.png`
-        : "https://cdn.brawlify.com/profile/28000000.png";
+        ? `https://cdn.brawlify.com/profile-icons/regular/${iconId}.png`
+        : "https://cdn.brawlify.com/profile-icons/regular/28000000.png";
     const totalVictorias = threeVsThree + soloVictories + duoVictories;
 
     let html = `
