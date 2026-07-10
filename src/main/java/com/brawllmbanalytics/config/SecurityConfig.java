@@ -88,6 +88,8 @@ public class SecurityConfig {
                         "/estadisticas.html",
                         "/cuenta.html",
                         "/cuentas.html",
+                        "/rankeds.html",
+                        "/rankeds_detalle.html",
                         "/css/**",
                         "/js/**",
                         "/images/**"
@@ -113,6 +115,9 @@ public class SecurityConfig {
 
                 .requestMatchers(HttpMethod.GET, "/brawlers").permitAll()
                 .requestMatchers(HttpMethod.GET, "/brawlers/**").permitAll()
+
+                .requestMatchers(HttpMethod.GET, "/rankeds/global").permitAll()
+                .requestMatchers(HttpMethod.GET, "/rankeds/local/**").permitAll()
 
               
                 .requestMatchers(HttpMethod.GET, "/tierlists").permitAll()
