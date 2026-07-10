@@ -23,11 +23,11 @@ public class BrawlerController {
     }
 
     @GetMapping("/brawlers")
-public List<Brawler> getBrawlers() {
-    List<Brawler> lista = brawlerRepository.findAll();
-    lista.forEach(b -> System.out.println("Brawler " + b.getNombre() + " → " + b.getIconUrl()));
-    return lista;
-}
+    public List<Brawler> getBrawlers() {
+        List<Brawler> lista = brawlerRepository.findAll();
+        lista.forEach(b -> b.setIconUrl("https://cdn.brawlify.com/brawlers/borderless/" + b.getId() + ".png"));
+        return lista;
+    }
     @GetMapping("/brawlers/{id}")
     public Brawler getBrawler(@PathVariable Integer id) {
         return brawlerRepository.findById(id)

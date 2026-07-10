@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
             catch (error) { console.error("Error al parsear JSON:", error); alert("Respuesta inválida del servidor."); return; }
             localStorage.setItem("userId", result.userId);
             localStorage.setItem("username", result.username);
+            localStorage.setItem("token", result.token);
             window.location.href = "dashboard.html";
         });
     }
@@ -84,9 +85,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 const userId = localStorage.getItem("userId");
                 if (!userId) { alert("Debes iniciar sesión."); return; }
                 const body = { tag: player.tag, nombre: player.name, trofeos: player.trophies, nivel: player.expLevel ?? 0 };
+                const token = localStorage.getItem("token");
                 const resV = await fetch(`${API_BASE}/cuentas/vincular`, {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
                     credentials: 'include',
                     body: JSON.stringify(body)
                 });
@@ -117,7 +122,10 @@ async function cargarCuentasVinculadas(cuentasContainer) {
         return;
     }
     try {
-        const res = await fetch(`${API_BASE}/cuentas/mias`, { credentials: 'include' });
+        const res = await fetch(`${API_BASE}/cuentas/mias`, {
+            credentials: 'include',
+            headers: { "Authorization": `Bearer ${token}` }
+        });
         if (!res.ok) { cuentasContainer.innerHTML = `<div class="empty-state"><p>Error cargando cuentas (${res.status}).</p></div>`; return; }
         const cuentas = await res.json();
         if (!cuentas.length) { cuentasContainer.innerHTML = '<div class="empty-state"><p>Aún no has vinculado ninguna cuenta.</p></div>'; return; }
