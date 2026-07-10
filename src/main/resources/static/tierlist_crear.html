@@ -2,255 +2,80 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Crear Tierlist - BrawlLMB Analytics</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Tierlist &mdash; BrawlLMB Analytics</title>
     <link rel="icon" href="/favicon_kenji.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #0f0f0f, #1a1a1a 40%, #202020);
-            color: #fff;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        .bg-logo {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            width: 600px;
-            height: 600px;
-            transform: translate(-50%, -50%);
-            opacity: 0.06;
-            background: url('images/logo_lmb.png') center/contain no-repeat;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        header {
-            background: rgba(20,20,20,0.85);
-            padding: 18px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            box-shadow: 0 2px 12px rgba(0,0,0,0.4);
-            backdrop-filter: blur(6px);
-            position: relative;
-            z-index: 10;
-        }
-
-        .logo-box {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-box img {
-            width: 42px;
-            height: 42px;
-        }
-
-        header h1 {
-            font-size: 28px;
-            font-weight: 700;
-            margin: 0;
-        }
-
-        nav a {
-            margin-left: 25px;
-            color: #ccc;
-            text-decoration: none;
-            font-weight: 500;
-            transition: .25s;
-        }
-
-        nav a:hover,
-        nav a.activo {
-            color: #4da3ff;
-        }
-
-        main {
-            max-width: 1400px;
-            margin: 40px auto;
-            padding: 0 40px;
-            z-index: 2;
-            position: relative;
-        }
-
-        h2 {
-            text-align: center;
-            font-size: 32px;
-            margin-bottom: 25px;
-            font-weight: 600;
-        }
-
-        h3 {
-            font-size: 22px;
-            margin-top: 20px;
-            margin-bottom: 12px;
-            font-weight: 500;
-        }
-
-        #brawlers-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            background: rgba(255,255,255,0.05);
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-        }
-
-        .brawler {
-            width: 55px;
-            height: 55px;
-            border-radius: 6px;
-            cursor: grab;
-            transition: transform .2s;
-        }
-
-        .brawler:hover {
-            transform: scale(1.1);
-        }
-
-        .tiers {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-top: 25px;
-        }
-
-        .tier-row {
-            display: flex;
-            background: rgba(255,255,255,0.06);
-            padding: 12px;
-            border-radius: 12px;
-            min-height: 90px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-            align-items: center;
-        }
-
-        .tier-label {
-            width: 70px;
-            padding: 12px 0;
-            font-size: 26px;
-            border-radius: 10px;
-            font-weight: 700;
-            text-align: center;
-            color: white;
-            margin-right: 15px;
-        }
-
-        .tier-S { background: #ff4d4d; }
-        .tier-A { background: #ff8c42; }
-        .tier-B { background: #ffc93c; }
-        .tier-C { background: #62e062; }
-        .tier-D { background: #4d79ff; }
-
-        .tier-dropzone {
-            flex: 1;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            min-height: 70px;
-            background: rgba(0,0,0,0.35);
-            padding: 12px;
-            border-radius: 10px;
-        }
-
-        button {
-            display: block;
-            margin: 35px auto 0;
-            padding: 14px 26px;
-            font-size: 20px;
-            font-weight: 600;
-            background: #4da3ff;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            transition: 0.25s;
-            color: white;
-        }
-
-        button:hover {
-            background: #1c7ed6;
-            transform: translateY(-3px);
-        }
-    </style>
+    <link rel="stylesheet" href="css/main.css">
 </head>
-
 <body>
 
-<div class="bg-logo"></div>
+<div class="bg-grid"></div>
 
 <header>
-    <div class="logo-box">
-        <img src="images/logo_lmb.png" alt="logo">
-        <h1>BrawlLMB Analytics</h1>
-    </div>
-
-    <nav>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="cuenta.html">Mi Cuenta Brawl</a>
-        <a href="estadisticas.html">Estadísticas</a>
+    <a class="logo-box" href="dashboard.html">
+        <img src="images/logo.svg" alt="BrawlLMB">
+        <h1>BrawlLMB</h1>
+    </a>
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+    <nav id="mainNav">
+        <a href="cuenta.html">Mi Cuenta</a>
+        <a href="estadisticas.html">Estad&iacute;sticas</a>
         <a href="mapas.html">Mapas</a>
         <a href="tierlist.html" class="activo">Tierlists</a>
-        <a href="cuentas.html">Cuentas vinculadas</a>
-        <a href="#" onclick="logout()">Cerrar Sesión</a>
+        <a href="#" onclick="logout()">Salir</a>
     </nav>
 </header>
 
 <main>
-
-    <h2>Crear Tierlist</h2>
-
-    <h3>Brawlers disponibles</h3>
-    <div id="brawlers-container"></div>
-
-    <h3>Ordena los brawlers por niveles</h3>
-
-    <div class="tiers">
-
-        <div class="tier-row">
-            <div class="tier-label tier-S">S</div>
-            <div class="tier-dropzone" data-tier="S"></div>
-        </div>
-
-        <div class="tier-row">
-            <div class="tier-label tier-A">A</div>
-            <div class="tier-dropzone" data-tier="A"></div>
-        </div>
-
-        <div class="tier-row">
-            <div class="tier-label tier-B">B</div>
-            <div class="tier-dropzone" data-tier="B"></div>
-        </div>
-
-        <div class="tier-row">
-            <div class="tier-label tier-C">C</div>
-            <div class="tier-dropzone" data-tier="C"></div>
-        </div>
-
-        <div class="tier-row">
-            <div class="tier-label tier-D">D</div>
-            <div class="tier-dropzone" data-tier="D"></div>
-        </div>
-
+    <div class="page-header">
+        <h2 class="section-title">Crear Tierlist</h2>
+        <p class="section-subtitle">Arrastra los brawlers a cada tier.</p>
     </div>
 
-    <button onclick="guardarTierlist()">Guardar Tierlist</button>
+    <h3 style="color:var(--text-muted); font-size:0.9rem; margin-bottom:0.75rem; text-transform:uppercase; letter-spacing:1px;">Brawlers disponibles</h3>
+    <div id="brawlers-container" class="glass-static brawler-pool"></div>
 
+    <h3 style="color:var(--text-muted); font-size:0.9rem; margin:2rem 0 0.75rem; text-transform:uppercase; letter-spacing:1px;">Ordena por niveles</h3>
+
+    <div class="tier-section">
+        <div class="tier-row glass-static">
+            <div class="tier-badge tier-S">S</div>
+            <div class="tier-dropzone" data-tier="S"></div>
+        </div>
+        <div class="tier-row glass-static">
+            <div class="tier-badge tier-A">A</div>
+            <div class="tier-dropzone" data-tier="A"></div>
+        </div>
+        <div class="tier-row glass-static">
+            <div class="tier-badge tier-B">B</div>
+            <div class="tier-dropzone" data-tier="B"></div>
+        </div>
+        <div class="tier-row glass-static">
+            <div class="tier-badge tier-C">C</div>
+            <div class="tier-dropzone" data-tier="C"></div>
+        </div>
+        <div class="tier-row glass-static">
+            <div class="tier-badge tier-D">D</div>
+            <div class="tier-dropzone" data-tier="D"></div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <button class="btn" onclick="guardarTierlist()">Guardar Tierlist</button>
+    </div>
 </main>
 
-<script>
+<footer>
+    &copy; 2025 BrawlLMB Analytics &mdash; Todos los derechos reservados.
+</footer>
 
-const API_BASE = "http://localhost:8080";
+<script>
+const API_BASE = "";
 let listaBrawlers = [];
+
+function toggleMenu() {
+    document.getElementById('mainNav').classList.toggle('open');
+}
 
 async function cargarBrawlers() {
     const res = await fetch(`${API_BASE}/brawl/brawlers`);
@@ -262,10 +87,10 @@ async function cargarBrawlers() {
     listaBrawlers.forEach(b => {
         const img = document.createElement("img");
         img.src = b.iconUrl;
-        img.className = "brawler";
+        img.className = "brawler-chip";
         img.draggable = true;
         img.dataset.id = b.id;
-
+        img.title = b.nombre;
         img.addEventListener("dragstart", dragStart);
         cont.appendChild(img);
     });
@@ -276,9 +101,11 @@ function dragStart(e) {
 }
 
 document.querySelectorAll(".tier-dropzone").forEach(zone => {
-    zone.addEventListener("dragover", e => e.preventDefault());
+    zone.addEventListener("dragover", e => { e.preventDefault(); zone.classList.add("drag-over"); });
+    zone.addEventListener("dragleave", () => zone.classList.remove("drag-over"));
     zone.addEventListener("drop", e => {
         e.preventDefault();
+        zone.classList.remove("drag-over");
         const id = e.dataTransfer.getData("id");
         moverBrawler(id, zone);
     });
@@ -294,15 +121,13 @@ pool.addEventListener("drop", e => {
 
 function moverBrawler(id, destino) {
     document.querySelectorAll(`[data-id='${id}']`).forEach(el => el.remove());
-
     const b = listaBrawlers.find(x => x.id == id);
-
     const img = document.createElement("img");
     img.src = b.iconUrl;
-    img.className = "brawler";
+    img.className = "brawler-chip";
     img.draggable = true;
     img.dataset.id = id;
-
+    img.title = b.nombre;
     img.addEventListener("dragstart", dragStart);
     destino.appendChild(img);
 }
@@ -312,18 +137,12 @@ async function guardarTierlist() {
     if (!nombre) return alert("Debes poner un nombre.");
 
     const token = localStorage.getItem("token");
-
     let items = [];
 
     document.querySelectorAll(".tier-dropzone").forEach(zone => {
         const tier = zone.dataset.tier;
-        const imgs = zone.querySelectorAll(".brawler");
-
-        imgs.forEach(img => {
-            items.push({
-                brawlerId: parseInt(img.dataset.id),
-                tier: tier
-            });
+        zone.querySelectorAll(".brawler-chip").forEach(img => {
+            items.push({ brawlerId: parseInt(img.dataset.id), tier: tier });
         });
     });
 
@@ -337,10 +156,7 @@ async function guardarTierlist() {
     for (let it of items) {
         await fetch(`${API_BASE}/tierlists/${nueva.id}/agregar-item`, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
             body: JSON.stringify(it)
         });
     }
@@ -350,8 +166,6 @@ async function guardarTierlist() {
 }
 
 cargarBrawlers();
-
 </script>
-
 </body>
 </html>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6c5ce7"/>
+      <stop offset="100%" stop-color="#00cec9"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a29bfe"/>
+      <stop offset="100%" stop-color="#00cec9"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Outer ring -->
+  <circle cx="64" cy="64" r="58" stroke="url(#g1)" stroke-width="3" fill="none" opacity="0.6"/>
+  <!-- Inner hexagon shape -->
+  <polygon points="64,18 104,40 104,88 64,110 24,88 24,40" stroke="url(#g2)" stroke-width="2" fill="rgba(108,92,231,0.08)"/>
+  <!-- Center star / analytics symbol -->
+  <path d="M64 32 L72 52 L94 52 L76 64 L82 84 L64 72 L46 84 L52 64 L34 52 L56 52 Z" fill="url(#g1)" filter="url(#glow)" opacity="0.9"/>
+  <!-- Data lines -->
+  <line x1="44" y1="95" x2="44" y2="78" stroke="#00cec9" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+  <line x1="56" y1="95" x2="56" y2="68" stroke="#6c5ce7" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+  <line x1="68" y1="95" x2="68" y2="62" stroke="#a29bfe" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+  <line x1="80" y1="95" x2="80" y2="72" stroke="#00cec9" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+  <!-- Base line -->
+  <line x1="38" y1="96" x2="86" y2="96" stroke="rgba(162,155,254,0.3)" stroke-width="1"/>
+</svg>
