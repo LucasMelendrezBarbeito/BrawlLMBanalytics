@@ -29,7 +29,8 @@ mvnw test -Dtest=BackendApplicationTests
 
 - **Java 17** and a running **MySQL** instance on `127.0.0.1:3306`.
 - Database must exist named `brawllmbanalytics`. Tables are **not** auto-created — `ddl-auto=none`. You need a pre-existing schema or manual DDL.
-- The app needs a valid **Supercell API token**, generated and IP-registered at the [Supercell Developer Portal](https://developer.brawlstars.com/). It is hardcoded in two places: `application.properties` key `supercell.token` and `BrawlStarsService.java` field `API_TOKEN`. If calls fail, check both.
+- The app needs a valid **Supercell API token**, generated and IP-registered at the [Supercell Developer Portal](https://developer.brawlstars.com/). It is provided via the **`SUPERCELL_TOKEN`** environment variable (single source: `application.properties` reads `${SUPERCELL_TOKEN}`, and `BrawlStarsService` injects `${supercell.token}`). If calls fail, check the env var and that it matches your current public IP.
+- **Secrets are read from environment variables**, never hardcoded (see `.env.example` for the full list): `JWT_SECRET`, `SUPERCELL_TOKEN`, and optionally `DB_USERNAME`/`DB_PASSWORD` (default `root`/empty). The app will not start if `JWT_SECRET` or `SUPERCELL_TOKEN` is missing.
 
 ## Architecture
 

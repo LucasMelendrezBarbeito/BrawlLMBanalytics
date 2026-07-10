@@ -2,6 +2,7 @@ package com.brawllmbanalytics.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
@@ -17,8 +18,7 @@ import java.util.Map;
 public class BrawlStarsService {
 
     
-    private static final String API_TOKEN =
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjIwMTNkYWJjLTEzMzQtNGIyYS05M2ExLWE1NDg0YzM2NjFiYSIsImlhdCI6MTc2NDcxMzQzNSwic3ViIjoiZGV2ZWxvcGVyLzgyNDFkZGUzLWRjN2MtMTc3Yy1lOWNmLTEzN2Q4MzAyNjczNyIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTM5LjQ3LjUyLjQ2Il0sInR5cGUiOiJjbGllbnQifV19.R3htXyxc8Ng5PwV-liflnyofttzjcfHn8V6fk4pbhTi2jbFWE7faA2P6zv4sy8pKNFdg-OPDZQDwqCXgFyPvGw";
+    private final String apiToken;
 
     
     private static final String API_URL = "https://api.brawlstars.com/v1/players/";
@@ -29,7 +29,8 @@ public class BrawlStarsService {
     private final HttpClient httpClient;
     private final ObjectMapper objectMapper;
 
-    public BrawlStarsService() {
+    public BrawlStarsService(@Value("${supercell.token}") String apiToken) {
+        this.apiToken = apiToken;
         this.httpClient = HttpClient.newHttpClient();
         this.objectMapper = new ObjectMapper();
     }
@@ -51,7 +52,7 @@ public class BrawlStarsService {
         try {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(url))
-                    .header("Authorization", "Bearer " + API_TOKEN)
+                    .header("Authorization", "Bearer " + apiToken)
                     .header("Accept", "application/json")
                     .GET()
                     .build();
@@ -96,7 +97,7 @@ public class BrawlStarsService {
         try {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(API_URL_EVENTS_ROTATION))
-                    .header("Authorization", "Bearer " + API_TOKEN)
+                    .header("Authorization", "Bearer " + apiToken)
                     .header("Accept", "application/json")
                     .GET()
                     .build();

@@ -311,7 +311,6 @@ async function guardarTierlist() {
     const nombre = prompt("Nombre de la tierlist:");
     if (!nombre) return alert("Debes poner un nombre.");
 
-    const usuarioId = localStorage.getItem("userId");
     const token = localStorage.getItem("token");
 
     let items = [];
@@ -328,7 +327,7 @@ async function guardarTierlist() {
         });
     });
 
-    const res = await fetch(`${API_BASE}/tierlists/crear?usuarioId=${usuarioId}&nombre=${encodeURIComponent(nombre)}`, {
+    const res = await fetch(`${API_BASE}/tierlists/crear?nombre=${encodeURIComponent(nombre)}`, {
         method: "POST",
         headers: { "Authorization": `Bearer ${token}` }
     });

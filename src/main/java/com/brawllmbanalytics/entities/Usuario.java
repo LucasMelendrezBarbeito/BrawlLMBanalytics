@@ -25,7 +25,13 @@ public class Usuario {
     private Integer id;
 
     private String username;
+
+    // Datos sensibles: nunca se serializan en respuestas JSON (Principio I de la constitution).
+    // La entrada de estos campos llega por DTO (RegisterRequest), no por la entidad.
+    @JsonIgnore
     private String email;
+
+    @JsonIgnore
     private String password;
 
     @Column(nullable = false)

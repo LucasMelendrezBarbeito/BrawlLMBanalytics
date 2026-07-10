@@ -64,10 +64,14 @@ public class SecurityConfig {
                 ).permitAll()
 
              
-                .requestMatchers("/admin/mapas/importar").permitAll()
+                .requestMatchers("/admin/mapas/importar").hasRole("ADMIN")
 
            
                 .requestMatchers("/auth/login", "/auth/register").permitAll()
+
+                // Permite renderizar /error con su status real (si no, el dispatch
+                // interno de error cae en anyRequest().authenticated() y devuelve 403)
+                .requestMatchers("/error").permitAll()
 
           
                 .requestMatchers(HttpMethod.GET, "/brawl/**").permitAll()
@@ -83,7 +87,7 @@ public class SecurityConfig {
               
                 .requestMatchers(HttpMethod.GET, "/tierlists").permitAll()
                 .requestMatchers(HttpMethod.GET, "/tierlists/*").permitAll()
-                .requestMatchers(HttpMethod.POST, "/tierlists/*/review").permitAll()
+                .requestMatchers(HttpMethod.POST, "/tierlists/*/review").authenticated()
 
                 .requestMatchers(HttpMethod.POST, "/tierlists/crear").authenticated()
                 .requestMatchers(HttpMethod.POST, "/tierlists/*/items").authenticated()

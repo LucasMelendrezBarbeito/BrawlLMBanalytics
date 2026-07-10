@@ -23,6 +23,8 @@ import com.brawllmbanalytics.repositories.UsuarioRepository;
 import com.brawllmbanalytics.security.JwtUtil;
 import com.brawllmbanalytics.services.TierlistService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/tierlists")
 public class TierlistController {
@@ -38,29 +40,42 @@ public class TierlistController {
 
     @PostMapping("/crear")
     public Tierlist crearTierlist(
-            @RequestParam Integer usuarioId,
-            @RequestParam String nombre) {
+            @RequestParam String nombre,
+            @RequestHeader("Authorization") String tokenHeader) {
 
-        return tierlistService.crearTierlist(usuarioId, nombre);
+        String token = tokenHeader.replace("Bearer ", "");
+        String username = jwtUtil.extractUsername(token);
+        Usuario user = usuarioRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        return tierlistService.crearTierlist(user.getId(), nombre);
     }
 
     @PostMapping("/{id}/agregar-item")
     public TierlistItem agregarItem(
             @PathVariable Integer id,
-            @RequestBody AgregarItemTierlistRequest req) {
+            @Valid @RequestBody AgregarItemTierlistRequest req) {
 
         return tierlistService.agregarItem(id, req.brawlerId(), req.tier());
     }
 
     // ⭐ AGREGAR RESEÑA CON PUNTUACIÓN
+    // El usuarioId se deriva del token autenticado, nunca de un parametro
+    // del request (Principio I de la constitution: evita IDOR).
     @PostMapping("/{id}/review")
     public ResenaTierlist agregarReview(
             @PathVariable Integer id,
-            @RequestParam Integer usuarioId,
             @RequestParam String comentario,
-            @RequestParam Integer puntuacion) {
+            @RequestParam Integer puntuacion,
+            @RequestHeader("Authorization") String tokenHeader) {
 
-        return tierlistService.agregarReview(id, usuarioId, comentario, puntuacion);
+        String token = tokenHeader.replace("Bearer ", "");
+        String username = jwtUtil.extractUsername(token);
+
+        Usuario user = usuarioRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        return tierlistService.agregarReview(id, user.getId(), comentario, puntuacion);
     }
 
     @GetMapping("")
