@@ -1,10 +1,12 @@
 <!--
 SYNC IMPACT REPORT
 ==================
-Version change: (plantilla sin versionar) → 1.0.0
-Motivo del bump: Ratificación inicial. Se sustituyen todos los placeholders de la
-plantilla por principios concretos del proyecto. Al ser la primera versión con
-contenido, se adopta 1.0.0 (MAJOR = establecimiento de la gobernanza).
+Version change: (plantilla sin versionar) → 1.0.0 → 1.1.0
+Motivo del bump:
+  - 1.0.0: Ratificación inicial. Se sustituyen todos los placeholders de la plantilla
+    por principios concretos del proyecto (MAJOR = establecimiento de la gobernanza).
+  - 1.1.0: Se añade a "Flujo de Desarrollo" la regla de commit tras cada cambio
+    verificado (MINOR = nueva guía, sin redefinir principios existentes).
 
 Principios definidos (antes → ahora):
   [PRINCIPLE_1] → I. Seguridad primero (NO NEGOCIABLE)
@@ -131,6 +133,10 @@ la calidad debe ser observable, no asumida.
   Spec Kit, pero respetando todos los principios.
 - **Ramas y PRs**: el trabajo se hace en ramas de feature; los PR se revisan verificando
   cumplimiento de la constitution antes de fusionar.
+- **Commit tras cada cambio verificado**: se commitea en cuanto algo está implementado
+  Y probado (compila, la app arranca y se ejercita el comportamiento afectado). Los
+  commits son pequeños y acotados a una unidad verificada. Nunca se commitean secrets
+  (Principio I).
 
 ## Governance
 
@@ -148,4 +154,4 @@ constitution de forma explícita).
 - **Guía de runtime**: `CLAUDE.md` es la referencia operativa del día a día y debe
   mantenerse coherente con esta constitution.
 
-**Version**: 1.0.0 | **Ratified**: 2026-07-10 | **Last Amended**: 2026-07-10
+**Version**: 1.1.0 | **Ratified**: 2026-07-10 | **Last Amended**: 2026-07-10
