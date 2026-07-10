@@ -37,7 +37,7 @@ Leyenda: ✅ hecho · 🔸 parcial · ⬜ pendiente
 | 2.7 | Configurar CORS explícitamente (whitelist en vez de `@CrossOrigin` abierto) | ⬜ | — |
 | 2.8 | `@ControllerAdvice` global (sin stack traces al cliente) | ✅ | `c225ef1` |
 | 2.9 | Migrar JWT de `localStorage` a cookies httpOnly | ⬜ | — |
-| 2.10 | Debug logs (`show-sql`, `logging...=DEBUG`) solo en perfil dev | ⬜ | — |
+| 2.10 | Debug logs (`show-sql`, `logging...=DEBUG`) solo en perfil dev | ✅ | `12d93df` |
 
 ## Fase 3 — Correcciones técnicas (efectos de quitar Lombok)
 
@@ -60,7 +60,7 @@ Leyenda: ✅ hecho · 🔸 parcial · ⬜ pendiente
 | # | Tarea | Estado |
 |---|-------|--------|
 | 5.1 | Refresh token + logout con blacklist | ⬜ |
-| 5.2 | Perfiles Spring (`application-dev` / `application-prod`) | ⬜ |
+| 5.2 | Perfiles Spring (`application-dev` creado en 2.10; falta `application-prod`) | 🔸 |
 | 5.3 | Actualizar dependencias (Spring Boot 3.3.0→3.3.x, jjwt, httpclient5) | ⬜ |
 | 5.4 | HTTPS/TLS (`server.ssl.*`) | ⬜ |
 | 5.5 | Check de username/email duplicado en el registro | ⬜ |
