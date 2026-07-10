@@ -22,7 +22,7 @@
         <a href="estadisticas.html">Estad&iacute;sticas</a>
         <a href="mapas.html" class="activo">Mapas</a>
         <a href="tierlist.html">Tierlists</a>
-        <a href="#" onclick="logout()">Salir</a>
+        <a href="#" onclick="event.preventDefault(); logout();">Salir</a>
     </nav>
 </header>
 
@@ -32,17 +32,17 @@
         <p class="section-subtitle">Explora mapas en rotaci&oacute;n y por modo de juego.</p>
     </div>
 
-    <div class="split-layout">
-        <section class="split-left">
-            <h3 style="color:var(--cyan); margin-bottom:1rem; font-size:1.1rem; letter-spacing:0.5px;">Rotaci&oacute;n activa</h3>
-            <div id="mapasRotacionContainer" class="maps-grid"></div>
-        </section>
+    <section style="margin-bottom:3rem;">
+        <h3 style="color:var(--cyan); margin-bottom:1rem; font-size:1.1rem; letter-spacing:0.5px;">Rotaci&oacute;n activa</h3>
+        <div id="mapasRotacionContainer" class="maps-grid"></div>
+    </section>
 
-        <section class="split-right">
-            <h3 style="color:var(--cyan); margin-bottom:1rem; font-size:1.1rem; letter-spacing:0.5px;">Por modo de juego</h3>
-            <div id="mapasPorModo"></div>
-        </section>
-    </div>
+    <div class="divider"></div>
+
+    <section>
+        <h3 style="color:var(--cyan); margin-bottom:1rem; font-size:1.1rem; letter-spacing:0.5px;">Por modo de juego</h3>
+        <div id="mapasPorModo"></div>
+    </section>
 
     <div class="divider"></div>
 

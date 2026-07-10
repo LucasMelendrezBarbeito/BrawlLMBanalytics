@@ -188,7 +188,9 @@ function pintarEstadisticasJugador(container, data) {
     const duoVictories    = data.duoVictories ?? 0;
     const brawlers        = data.brawlers ?? [];
     const iconId = data.icon?.id ?? null;
-    const avatarUrl = iconId ? `https://cdn.brawlify.com/profile/${iconId}.png` : "images/default_avatar.png";
+    const avatarUrl = iconId
+        ? `https://cdn.brawlify.com/profile/${iconId}.png`
+        : "https://cdn.brawlify.com/profile/28000000.png";
     const totalVictorias = threeVsThree + soloVictories + duoVictories;
 
     let html = `
@@ -244,8 +246,10 @@ function moverCarrusel(dir) {
     if (!track) return;
     const cards = track.querySelectorAll(".brawler-stat-card");
     if (!cards.length) return;
-    const cardW = cards[0].offsetWidth + 20;
-    const maxIdx = Math.max(0, cards.length - 3);
+    const gap = 20;
+    const cardW = cards[0].offsetWidth + gap;
+    const visible = 4;
+    const maxIdx = Math.max(0, cards.length - visible);
     carruselIndex = Math.max(0, Math.min(maxIdx, carruselIndex + dir));
     track.style.transform = `translateX(${-carruselIndex * cardW}px)`;
 }
@@ -340,8 +344,10 @@ function scrollCarousel(btn, dir) {
     const wrapper = btn.closest('.maps-carousel-wrapper');
     const carousel = wrapper.querySelector('.maps-carousel');
     const card = carousel.querySelector('.map-card');
-    const step = card ? card.offsetWidth + 12 : 180;
-    carousel.scrollBy({ left: dir * step * 2, behavior: 'smooth' });
+    const gap = 12;
+    const step = card ? card.offsetWidth + gap : 172;
+    const visible = 4;
+    carousel.scrollBy({ left: dir * step * visible, behavior: 'smooth' });
 }
 
 async function cargarTopBrawlersMapa(mapaId, origen) {
