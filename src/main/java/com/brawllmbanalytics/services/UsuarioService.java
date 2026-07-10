@@ -20,9 +20,9 @@ public class UsuarioService {
 
     public Usuario registrar(RegisterRequest request) {
         Usuario u = new Usuario();
-        u.setUsername(request.getUsername());
-        u.setEmail(request.getEmail());
-        u.setPassword(passwordEncoder.encode(request.getPassword()));
+        u.setUsername(request.username());
+        u.setEmail(request.email());
+        u.setPassword(passwordEncoder.encode(request.password()));
 
         
         u.setRol("USER");   // más adelante podremos crear admins a mano o con otra lógica

@@ -1,0 +1,63 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project
+
+BrawlLMBanalytics is a data-analysis web platform for the mobile game **Brawl Stars**. It lets users link their game accounts to view personal/brawler stats, browse the map catalog with per-map winrate rankings, track the live event rotation, and build interactive drag-and-drop tierlists with a star-rating/comments review system. It integrates the official Supercell Brawl Stars API and the community Brawlify (BrawlAPI) API.
+
+## Commands
+
+```bash
+# Build & run (use the Maven wrapper, not system mvn)
+mvnw spring-boot:run
+
+# Run the single context-load test (needs MySQL running)
+mvnw test
+
+# Run a specific test class
+mvnw test -Dtest=BackendApplicationTests
+```
+
+## Environment prerequisites
+
+- **Java 17** and a running **MySQL** instance on `127.0.0.1:3306`.
+- Database must exist named `brawllmbanalytics`. Tables are **not** auto-created — `ddl-auto=none`. You need a pre-existing schema or manual DDL.
+- The app needs a valid **Supercell API token**, generated and IP-registered at the [Supercell Developer Portal](https://developer.brawlstars.com/). It is hardcoded in two places: `application.properties` key `supercell.token` and `BrawlStarsService.java` field `API_TOKEN`. If calls fail, check both.
+
+## Architecture
+
+This is a **single-module Spring Boot 3.3 backend** that also serves the frontend as static files from `src/main/resources/static/`. There is no separate Node/React build — frontend is plain HTML5/CSS3/ES6 using the Fetch API and the native Drag & Drop API for the tierlist builder.
+
+- **Entry point**: `BackendApplication.java` (`@SpringBootApplication`)
+- **Frontend**: served directly by Spring Boot at `http://localhost:8080/`
+- **Package layout** (`src/main/java/com/brawllmbanalytics/`): `controllers/`, `services/`, `repositories/`, `security/`, `dto/`, `entities/`, `config/`
+- **API routes** follow Spanish naming (`/auth`, `/brawl`, `/mapas`, `/tierlists`, `/cuentas`, `/estadisticas`, `/admin/mapas`)
+- **DTOs**: Java `record` types under `dto/`. No Lombok (explicitly removed — do not reintroduce it).
+- **Entities**: JPA entities with Spanish table names (`usuarios`, `mapas`, `brawlers`, `tierlists`, etc.)
+
+## External APIs
+
+Two external APIs are consumed, via two different HTTP client stacks — when adding a new external call, follow the pattern already used by the neighboring service rather than mixing stacks arbitrarily:
+- **Supercell official API** (`api.brawlstars.com/v1`): consumed via `java.net.http.HttpClient` (JEP 321) in `BrawlStarsService`; Bearer-token auth.
+- **BrawlAPI community API** (`api.brawlapi.com/v1`): consumed via `RestTemplate` (backed by Apache HttpClient 5) in `MapasService.importarMapasDesdeBrawlAPI()`; unauthenticated.
+
+## Security
+
+- JWT-based, stateless (Spring Security session disabled, CSRF disabled, CORS disabled).
+- Passwords hashed with BCrypt. Tokens signed with HS256 using `jwt.secret` from properties.
+- `JwtAuthenticationFilter` skips auth for static resources (`/css/**`, `/js/**`, `/images/**`, `*.html`), login/register, and public GET endpoints.
+- Public routes: GET brawl data, GET maps, GET tierlists. Protected: POST tierlist creation, account linking, user-specific GETs.
+
+## Testing
+
+- Only one test exists: `BackendApplicationTests` (`@SpringBootTest`). It loads the full Spring context, so **MySQL must be running** or it fails.
+- No unit tests or mocked-service tests exist.
+
+## Project quirks
+
+- `TestCurlController.java` spawns `powershell` subprocesses — it is Windows-only diagnostic code.
+- The `.github/java-upgrade/` directory is gitignored (contains `**/*` inside its own `.gitignore`).
+- `Brawler`, `Gadget`, and `StarPower` entities use **manual** IDs (no `@GeneratedValue`). All other entities use `IDENTITY`.
+- The `BrawlController` maps to `/brawl` and `BrawlerController` also maps to `/brawl` (the Brawler endpoints resolve as sub-paths: `/brawl/brawlers`).
+- Database provisioning is currently manual; a Docker-based setup is planned but not yet implemented (see README's "Futuras Mejoras").
