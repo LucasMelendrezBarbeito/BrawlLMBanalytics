@@ -64,7 +64,7 @@ public class SecurityConfig {
                 ).permitAll()
 
              
-                .requestMatchers("/admin/mapas/importar").permitAll()
+                .requestMatchers("/admin/mapas/importar").hasRole("ADMIN")
 
            
                 .requestMatchers("/auth/login", "/auth/register").permitAll()
@@ -83,7 +83,7 @@ public class SecurityConfig {
               
                 .requestMatchers(HttpMethod.GET, "/tierlists").permitAll()
                 .requestMatchers(HttpMethod.GET, "/tierlists/*").permitAll()
-                .requestMatchers(HttpMethod.POST, "/tierlists/*/review").permitAll()
+                .requestMatchers(HttpMethod.POST, "/tierlists/*/review").authenticated()
 
                 .requestMatchers(HttpMethod.POST, "/tierlists/crear").authenticated()
                 .requestMatchers(HttpMethod.POST, "/tierlists/*/items").authenticated()

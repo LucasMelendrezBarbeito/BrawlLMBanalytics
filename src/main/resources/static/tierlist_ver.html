@@ -344,14 +344,26 @@ async function enviarReview() {
     const id = params.get("id");
 
     const comentario = document.getElementById("comentario").value.trim();
-    const usuarioId  = localStorage.getItem("userId");
+    const token = localStorage.getItem("token");
 
+    if (!token) return alert("Debes iniciar sesión para dejar una reseña.");
     if (!comentario) return alert("Escribe un comentario.");
     if (puntuacionSeleccionada == 0) return alert("Selecciona una puntuación en estrellas.");
 
-    const url = `${API_BASE}/tierlists/${id}/review?usuarioId=${usuarioId}&comentario=${encodeURIComponent(comentario)}&puntuacion=${puntuacionSeleccionada}`;
+    // El usuarioId ya no se envía: el backend lo deriva del token (anti-IDOR).
+    const url = `${API_BASE}/tierlists/${id}/review?comentario=${encodeURIComponent(comentario)}&puntuacion=${puntuacionSeleccionada}`;
 
-    await fetch(url, { method: "POST" });
+    const resp = await fetch(url, {
+        method: "POST",
+        headers: { "Authorization": `Bearer ${token}` }
+    });
+
+    if (!resp.ok) {
+        alert(resp.status === 401 || resp.status === 403
+            ? "Debes iniciar sesión para dejar una reseña."
+            : "No se pudo enviar la reseña.");
+        return;
+    }
 
     alert("¡Reseña enviada!");
     document.getElementById("comentario").value = "";

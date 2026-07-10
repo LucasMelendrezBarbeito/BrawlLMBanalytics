@@ -53,14 +53,22 @@ public class TierlistController {
     }
 
     // ⭐ AGREGAR RESEÑA CON PUNTUACIÓN
+    // El usuarioId se deriva del token autenticado, nunca de un parametro
+    // del request (Principio I de la constitution: evita IDOR).
     @PostMapping("/{id}/review")
     public ResenaTierlist agregarReview(
             @PathVariable Integer id,
-            @RequestParam Integer usuarioId,
             @RequestParam String comentario,
-            @RequestParam Integer puntuacion) {
+            @RequestParam Integer puntuacion,
+            @RequestHeader("Authorization") String tokenHeader) {
 
-        return tierlistService.agregarReview(id, usuarioId, comentario, puntuacion);
+        String token = tokenHeader.replace("Bearer ", "");
+        String username = jwtUtil.extractUsername(token);
+
+        Usuario user = usuarioRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        return tierlistService.agregarReview(id, user.getId(), comentario, puntuacion);
     }
 
     @GetMapping("")
