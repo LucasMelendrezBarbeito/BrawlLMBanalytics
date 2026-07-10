@@ -17,12 +17,12 @@ public class EstadisticasController {
     @PostMapping
     public EstadisticaBrawlerUsuario guardar(@RequestBody GuardarEstadisticaRequest req) {
         return estadisticasService.guardarStats(
-                req.getCuentaBrawlId(),
-                req.getBrawlerId(),
-                req.getTrofeos(),
-                req.getMaxTrofeos(),
-                req.getPoder(),
-                req.getRango()
+                req.cuentaBrawlId(),
+                req.brawlerId(),
+                req.trofeos(),
+                req.maxTrofeos(),
+                req.poder(),
+                req.rango()
         );
     }
 }

@@ -23,11 +23,11 @@ public class CuentaBrawlController {
     @PostMapping("/vincular")
     public CuentaBrawl vincular(@RequestBody VincularCuentaRequest req) {
         return cuentaBrawlService.vincularCuenta(
-                req.getUsuarioId(),
-                req.getTag(),
-                req.getNombre(),
-                req.getTrofeos(),
-                req.getNivel()
+                req.usuarioId(),
+                req.tag(),
+                req.nombre(),
+                req.trofeos(),
+                req.nivel()
         );
     }
 

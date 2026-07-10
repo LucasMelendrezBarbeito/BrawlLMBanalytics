@@ -49,7 +49,7 @@ public class TierlistController {
             @PathVariable Integer id,
             @RequestBody AgregarItemTierlistRequest req) {
 
-        return tierlistService.agregarItem(id, req.getBrawlerId(), req.getTier());
+        return tierlistService.agregarItem(id, req.brawlerId(), req.tier());
     }
 
     // ⭐ AGREGAR RESEÑA CON PUNTUACIÓN

@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "brawlers")
@@ -19,6 +20,10 @@ public class Brawler {
     private String nombre;
     private String rareza;
     private String descripcion;
+
+    // URL del icono; no se persiste, se calcula en runtime desde el id (ver TierlistService)
+    @Transient
+    private String iconUrl;
 
     public Integer getId() {
         return id;
@@ -50,6 +55,14 @@ public class Brawler {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getIconUrl() {
+        return iconUrl;
+    }
+
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
     }
 
     public List<Gadget> getGadgets() {
