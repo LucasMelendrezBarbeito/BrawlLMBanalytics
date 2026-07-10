@@ -22,7 +22,7 @@ Leyenda: ✅ hecho · 🔸 parcial · ⬜ pendiente
 | 1.3 | Proteger `/admin/mapas/importar` (`permitAll` → `hasRole("ADMIN")`) | ✅ | `00c51bd` |
 | 1.4 | Proteger `/tierlists/*/review` + derivar `usuarioId` del token | ✅ | `00c51bd` |
 | 1.5 | Ocultar `password` y `email` en respuestas JSON (`@JsonIgnore`) | ✅ | `83bc7a2` |
-| 1.6 | **Sanitizar XSS en el render de reseñas** (`tierlist_ver.html` usa `innerHTML` con `${r.comentario}` sin escapar) | ⬜ | — |
+| 1.6 | Sanitizar XSS en el render de reseñas (`escapeHtml` en `tierlist_ver.html`) | ✅ | `4284e09` |
 
 ## Fase 2 — Hardening de seguridad
 
