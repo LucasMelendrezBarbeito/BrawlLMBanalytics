@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rankeds &mdash; BrawlLMB Analytics</title>
+    <link rel="icon" href="/favicon_kenji.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<header>
+    <a class="logo-box" href="dashboard.html">
+        <img src="images/logo.svg" alt="BrawlLMB">
+        <h1>BrawlLMB</h1>
+    </a>
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+    <nav id="mainNav">
+        <a href="cuenta.html">Mi Cuenta</a>
+        <a href="estadisticas.html">Estad&iacute;sticas</a>
+        <a href="mapas.html">Mapas</a>
+        <a href="tierlist.html">Tierlists</a>
+        <a href="rankeds.html" class="activo">Rankeds</a>
+        <a href="#" onclick="event.preventDefault(); logout();">Salir</a>
+    </nav>
+</header>
+
+<main>
+    <div class="page-header">
+        <h2 class="section-title">Rankeds</h2>
+        <p class="section-subtitle">Clasificaci&oacute;n global y local de los mejores jugadores.</p>
+    </div>
+
+    <div class="text-center mb-3">
+        <div style="display:inline-flex; gap:10px;">
+            <button id="btnGlobal" class="btn" onclick="cargarRankings('global')">Top Global</button>
+            <button id="btnLocal" class="btn btn-outline" onclick="cargarRankings('local')">Local</button>
+        </div>
+    </div>
+
+    <div id="rankingsContainer" class="glass-static" style="padding:1.5rem; max-width:800px; margin:0 auto;">
+        <div class="text-center" style="color:var(--text-muted); padding:2rem;">Cargando clasificaci&oacute;n...</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <section id="seccionCuentas" style="display:none; max-width:800px; margin:0 auto;">
+        <h3 style="margin-bottom:1rem;">Tus cuentas</h3>
+        <div id="cuentasRankedsContainer" class="accounts-grid"></div>
+    </section>
+</main>
+
+<footer>
+    &copy; 2025 BrawlLMB Analytics &mdash; Todos los derechos reservados.
+</footer>
+
+<script src="js/auth.js"></script>
+<script>
+let currentView = 'global';
+let userCountryCode = null;
+
+function toggleMenu() {
+    document.getElementById('mainNav').classList.toggle('open');
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    cargarRankings('global');
+    detectarPaisYcargarCuentas();
+});
+
+async function detectarPaisYcargarCuentas() {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    try {
+        const res = await fetch(`${API_BASE}/cuentas/mias`, {
+            credentials: 'include',
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+        if (!res.ok) return;
+        const cuentas = await res.json();
+        if (cuentas.length > 0) {
+            const playerRes = await fetch(`${API_BASE}/brawl/player?tag=${cuentas[0].tag.replace('#','')}`);
+            if (playerRes.ok) {
+                const player = await playerRes.json();
+                userCountryCode = player.region || null;
+            }
+        }
+        mostrarCuentas(cuentas);
+    } catch (err) {
+        console.error("Error detectando país:", err);
+    }
+}
+
+function mostrarCuentas(cuentas) {
+    if (!cuentas.length) return;
+    document.getElementById('seccionCuentas').style.display = 'block';
+    const cont = document.getElementById('cuentasRankedsContainer');
+    let html = "";
+    cuentas.forEach(c => {
+        html += `
+            <div class="account-card glass animate-in">
+                <h3>${c.nombre}</h3>
+                <p class="tag">${c.tag}</p>
+                <p class="trophies">Trofeos: ${c.trofeos}</p>
+                <button class="btn btn-sm" onclick="window.location.href='rankeds_detalle.html?cuentaId=${c.id}'">Ver detalle ranked</button>
+            </div>`;
+    });
+    cont.innerHTML = html;
+}
+
+async function cargarRankings(tipo) {
+    currentView = tipo;
+    const cont = document.getElementById('rankingsContainer');
+    const btnGlobal = document.getElementById('btnGlobal');
+    const btnLocal = document.getElementById('btnLocal');
+
+    if (tipo === 'global') {
+        btnGlobal.className = 'btn';
+        btnLocal.className = 'btn btn-outline';
+    } else {
+        btnGlobal.className = 'btn btn-outline';
+        btnLocal.className = 'btn';
+    }
+
+    cont.innerHTML = '<div class="text-center" style="color:var(--text-muted); padding:2rem;">Cargando...</div>';
+
+    try {
+        let url;
+        if (tipo === 'global') {
+            url = `${API_BASE}/rankeds/global`;
+        } else {
+            if (!userCountryCode) {
+                cont.innerHTML = '<div class="empty-state"><p>No se pudo detectar tu regi&oacute;n. Mostrando clasificaci&oacute;n global.</p></div>';
+                cargarRankings('global');
+                return;
+            }
+            url = `${API_BASE}/rankeds/local/${userCountryCode}`;
+        }
+
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`Error ${res.status}`);
+        const players = await res.json();
+
+        let html = `<table class="top-brawlers-table" style="width:100%;">
+            <thead><tr><th>#</th><th></th><th>Jugador</th><th>Trofeos</th></tr></thead>
+            <tbody>`;
+        players.forEach(p => {
+            const iconUrl = p.iconId ? `https://cdn.brawlify.com/profile-icons/regular/${p.iconId}.png` : '';
+            html += `<tr>
+                <td class="rank-num">${p.rank}</td>
+                <td>${iconUrl ? `<img src="${iconUrl}" style="width:28px;height:28px;border-radius:4px;">` : ''}</td>
+                <td>${p.name}${p.clubName ? `<br><span style="font-size:0.75rem;color:var(--text-dim);">${p.clubName}</span>` : ''}</td>
+                <td class="winrate">${p.trophies.toLocaleString()}</td>
+            </tr>`;
+        });
+        html += '</tbody></table>';
+        cont.innerHTML = html;
+
+    } catch (err) {
+        console.error("Error cargando rankings:", err);
+        cont.innerHTML = '<div class="empty-state"><p>Error al cargar la clasificaci&oacute;n.</p></div>';
+    }
+}
+</script>
+</body>
+</html>

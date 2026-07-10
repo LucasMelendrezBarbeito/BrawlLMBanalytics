@@ -20,10 +20,10 @@
 
 **Purpose**: Crear entidades y repositorios compartidos por todas las historias.
 
-- [ ] T001 Crear entidad `RankedSeason` en `src/main/java/com/brawllmbanalytics/entities/RankedSeason.java` — campos: id, cuentaBrawl (FK), seasonNumber, rank, trophies, createdAt
-- [ ] T002 Crear entidad `RankedMatch` en `src/main/java/com/brawllmbanalytics/entities/RankedMatch.java` — campos: id, cuentaBrawl (FK), battleTime, mode, rank, trophyChange, brawlerName, brawlerId, result
-- [ ] T003 [P] Crear `RankedSeasonRepository` en `src/main/java/com/brawllmbanalytics/repositories/RankedSeasonRepository.java` — métodos: findByCuentaBrawlIdOrderBySeasonNumberDesc, findByCuentaBrawlIdAndSeasonNumber
-- [ ] T004 [P] Crear `RankedMatchRepository` en `src/main/java/com/brawllmbanalytics/repositories/RankedMatchRepository.java` — métodos: findTop10ByCuentaBrawlIdOrderByBattleTimeDesc
+- [x] T001 Crear entidad `RankedSeason` en `src/main/java/com/brawllmbanalytics/entities/RankedSeason.java` — campos: id, cuentaBrawl (FK), seasonNumber, rank, trophies, createdAt
+- [x] T002 Crear entidad `RankedMatch` en `src/main/java/com/brawllmbanalytics/entities/RankedMatch.java` — campos: id, cuentaBrawl (FK), battleTime, mode, rank, trophyChange, brawlerName, brawlerId, result
+- [x] T003 [P] Crear `RankedSeasonRepository` en `src/main/java/com/brawllmbanalytics/repositories/RankedSeasonRepository.java` — métodos: findByCuentaBrawlIdOrderBySeasonNumberDesc, findByCuentaBrawlIdAndSeasonNumber
+- [x] T004 [P] Crear `RankedMatchRepository` en `src/main/java/com/brawllmbanalytics/repositories/RankedMatchRepository.java` — métodos: findTop10ByCuentaBrawlIdOrderByBattleTimeDesc
 
 ---
 
@@ -31,10 +31,10 @@
 
 **Purpose**: DTOs y service base que todas las historias necesitan.
 
-- [ ] T005 [P] Crear `RankedPlayerDTO` en `src/main/java/com/brawllmbanalytics/dto/RankedPlayerDTO.java` — record con: tag, name, iconId, trophies, rank, clubName
-- [ ] T006 [P] Crear `RankedDetailDTO` en `src/main/java/com/brawllmbanalytics/dto/RankedDetailDTO.java` — record con: cuentaId, tag, nombre, ranked (currentRank, currentTrophies), temporadas (lista), ultimasPartidas (lista)
-- [ ] T007 [P] Crear `RankedMatchDTO` en `src/main/java/com/brawllmbanalytics/dto/RankedMatchDTO.java` — record con: battleTime, mode, rank, trophyChange, brawlerName, brawlerId, result
-- [ ] T008 Crear `RankedService` en `src/main/java/com/brawllmbanalytics/services/RankedService.java` — métodos: getGlobalRankings(), getLocalRankings(countryCode), getCuentaRankedDetail(cuentaId, usuarioId), syncCuentaRanked(cuentaId, usuarioId)
+- [x] T005 [P] Crear `RankedPlayerDTO` en `src/main/java/com/brawllmbanalytics/dto/RankedPlayerDTO.java` — record con: tag, name, iconId, trophies, rank, clubName
+- [x] T006 [P] Crear `RankedDetailDTO` en `src/main/java/com/brawllmbanalytics/dto/RankedDetailDTO.java` — record con: cuentaId, tag, nombre, ranked (currentRank, currentTrophies), temporadas (lista), ultimasPartidas (lista)
+- [x] T007 [P] Crear `RankedMatchDTO` en `src/main/java/com/brawllmbanalytics/dto/RankedMatchDTO.java` — record con: battleTime, mode, rank, trophyChange, brawlerName, brawlerId, result
+- [x] T008 Crear `RankedService` en `src/main/java/com/brawllmbanalytics/services/RankedService.java` — métodos: getGlobalRankings(), getLocalRankings(countryCode), getCuentaRankedDetail(cuentaId, usuarioId), syncCuentaRanked(cuentaId, usuarioId)
 
 ---
 
@@ -46,10 +46,10 @@
 
 ### Implementation for User Story 1
 
-- [ ] T009 [US1] Implementar `getGlobalRankings()` en `RankedService` — llama a `GET /rankings/global/players?limit=200` de la API de Supercell, mapea respuesta a lista de `RankedPlayerDTO`
-- [ ] T010 [US1] Crear endpoint `GET /rankeds/global` en `src/main/java/com/brawllmbanalytics/controllers/RankedController.java` — delega a `rankedService.getGlobalRankings()`, retorna lista de `RankedPlayerDTO`
-- [ ] T011 [US1] Crear vista `rankeds.html` en `src/main/resources/static/rankeds.html` — estructura HTML con nav, botones "Top Global" / "Local", contenedor de clasificación
-- [ ] T012 [US1] Implementar función `cargarRankings(tipo)` en `src/main/resources/static/js/auth.js` — fetch a `/rankeds/global` o `/rankeds/local/{code}`, renderiza lista con icono de liga, puntos y nombre
+- [x] T009 [US1] Implementar `getGlobalRankings()` en `RankedService` — llama a `GET /rankings/global/players?limit=200` de la API de Supercell, mapea respuesta a lista de `RankedPlayerDTO`
+- [x] T010 [US1] Crear endpoint `GET /rankeds/global` en `src/main/java/com/brawllmbanalytics/controllers/RankedController.java` — delega a `rankedService.getGlobalRankings()`, retorna lista de `RankedPlayerDTO`
+- [x] T011 [US1] Crear vista `rankeds.html` en `src/main/resources/static/rankeds.html` — estructura HTML con nav, botones "Top Global" / "Local", contenedor de clasificación
+- [x] T012 [US1] Implementar función `cargarRankings(tipo)` en `src/main/resources/static/js/auth.js` — fetch a `/rankeds/global` o `/rankeds/local/{code}`, renderiza lista con icono de liga, puntos y nombre
 
 **Checkpoint**: El usuario puede ver el Top 200 global en la vista de rankeds.
 
@@ -63,10 +63,10 @@
 
 ### Implementation for User Story 2
 
-- [ ] T013 [US2] Implementar `getLocalRankings(countryCode)` en `RankedService` — llama a `GET /rankings/{countryCode}/players?limit=200`, mapea a `RankedPlayerDTO`
-- [ ] T014 [US2] Crear endpoint `GET /rankeds/local/{countryCode}` en `RankedController.java` — delega a `rankedService.getLocalRankings(countryCode)`
-- [ ] T015 [US2] Implementar lógica de detección de país en `cargarRankings()` en `auth.js` — usar `countryCode` del jugador vinculado o fallback a "global"
-- [ ] T016 [US2] Implementar toggle "Top Global" / "Local" en `rankeds.html` — botones que llaman a `cargarRankings("global")` o `cargarRankings("local")`
+- [x] T013 [US2] Implementar `getLocalRankings(countryCode)` en `RankedService` — llama a `GET /rankings/{countryCode}/players?limit=200`, mapea a `RankedPlayerDTO`
+- [x] T014 [US2] Crear endpoint `GET /rankeds/local/{countryCode}` en `RankedController.java` — delega a `rankedService.getLocalRankings(countryCode)`
+- [x] T015 [US2] Implementar lógica de detección de país en `cargarRankings()` en `auth.js` — usar `countryCode` del jugador vinculado o fallback a "global"
+- [x] T016 [US2] Implementar toggle "Top Global" / "Local" en `rankeds.html` — botones que llaman a `cargarRankings("global")` o `cargarRankings("local")`
 
 **Checkpoint**: El usuario puede alternar entre clasificación global y local.
 
@@ -80,9 +80,9 @@
 
 ### Implementation for User Story 3
 
-- [ ] T017 [US3] Implementar sección "Tus cuentas" en `rankeds.html` — contenedor debajo de la clasificación, visible solo si hay token
-- [ ] T018 [US3] Implementar función `cargarCuentasRankeds()` en `auth.js` — fetch a `/cuentas/mias`, renderiza tarjetas de cuenta con botón "Ver detalle"
-- [ ] T019 [US3] Implementar navegación a vista de detalle al seleccionar cuenta en `auth.js` — redirige a `rankeds_detalle.html?cuentaId={id}`
+- [x] T017 [US3] Implementar sección "Tus cuentas" en `rankeds.html` — contenedor debajo de la clasificación, visible solo si hay token
+- [x] T018 [US3] Implementar función `cargarCuentasRankeds()` en `auth.js` — fetch a `/cuentas/mias`, renderiza tarjetas de cuenta con botón "Ver detalle"
+- [x] T019 [US3] Implementar navegación a vista de detalle al seleccionar cuenta en `auth.js` — redirige a `rankeds_detalle.html?cuentaId={id}`
 
 **Checkpoint**: El usuario ve sus cuentas vinculadas y puede seleccionar una.
 
@@ -96,13 +96,13 @@
 
 ### Implementation for User Story 4
 
-- [ ] T020 [US4] Implementar `getCuentaRankedDetail(cuentaId, usuarioId)` en `RankedService` — busca cuenta, valida pertenencia (anti-IDOR), obtiene datos ranked de Supercell, consulta BD para temporadas y partidas
-- [ ] T021 [US4] Implementar `syncCuentaRanked(cuentaId, usuarioId)` en `RankedService` — sincroniza datos ranked con la API de Supercell, guarda/actualiza `RankedSeason` y `RankedMatch` en BD
-- [ ] T022 [US4] Crear endpoint `GET /rankeds/cuenta/{cuentaId}` en `RankedController.java` — delega a `rankedService.getCuentaRankedDetail()`, retorna `RankedDetailDTO`
-- [ ] T023 [US4] Crear endpoint `POST /rankeds/cuenta/{cuentaId}/sync` en `RankedController.java` — delega a `rankedService.syncCuentaRanked()`
-- [ ] T024 [US4] Crear vista `rankeds_detalle.html` en `src/main/resources/static/rankeds_detalle.html` — estructura HTML con resumen visual de rango, historial de temporadas y lista de partidas
-- [ ] T025 [US4] Implementar función `cargarDetalleRanked(cuentaId)` en `auth.js` — fetch a `/rankeds/cuenta/{cuentaId}`, renderiza rango actual, temporadas y partidas
-- [ ] T026 [US4] Implementar función `sincronizarRanked(cuentaId)` en `auth.js` — fetch POST a `/rankeds/cuenta/{cuentaId}/sync`, recarga detalle tras sincronización
+- [x] T020 [US4] Implementar `getCuentaRankedDetail(cuentaId, usuarioId)` en `RankedService` — busca cuenta, valida pertenencia (anti-IDOR), obtiene datos ranked de Supercell, consulta BD para temporadas y partidas
+- [x] T021 [US4] Implementar `syncCuentaRanked(cuentaId, usuarioId)` en `RankedService` — sincroniza datos ranked con la API de Supercell, guarda/actualiza `RankedSeason` y `RankedMatch` en BD
+- [x] T022 [US4] Crear endpoint `GET /rankeds/cuenta/{cuentaId}` en `RankedController.java` — delega a `rankedService.getCuentaRankedDetail()`, retorna `RankedDetailDTO`
+- [x] T023 [US4] Crear endpoint `POST /rankeds/cuenta/{cuentaId}/sync` en `RankedController.java` — delega a `rankedService.syncCuentaRanked()`
+- [x] T024 [US4] Crear vista `rankeds_detalle.html` en `src/main/resources/static/rankeds_detalle.html` — estructura HTML con resumen visual de rango, historial de temporadas y lista de partidas
+- [x] T025 [US4] Implementar función `cargarDetalleRanked(cuentaId)` en `auth.js` — fetch a `/rankeds/cuenta/{cuentaId}`, renderiza rango actual, temporadas y partidas
+- [x] T026 [US4] Implementar función `sincronizarRanked(cuentaId)` en `auth.js` — fetch POST a `/rankeds/cuenta/{cuentaId}/sync`, recarga detalle tras sincronización
 
 **Checkpoint**: El usuario puede ver el detalle ranked completo de una cuenta.
 
@@ -122,7 +122,7 @@
 
 **Purpose**: Verificación final, roadmap y validación.
 
-- [ ] T030 Añadir enlace "Rankeds" a la nav bar en todas las páginas HTML
+- [x] T030 Añadir enlace "Rankeds" a la nav bar en todas las páginas HTML
 - [ ] T031 Ejecutar validación de `quickstart.md` — probar los 7 escenarios documentados
 - [ ] T032 Actualizar `docs/roadmap.md` con la feature de Rankeds y commits
 

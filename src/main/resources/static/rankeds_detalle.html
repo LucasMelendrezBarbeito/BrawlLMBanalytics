@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle Ranked &mdash; BrawlLMB Analytics</title>
+    <link rel="icon" href="/favicon_kenji.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<header>
+    <a class="logo-box" href="dashboard.html">
+        <img src="images/logo.svg" alt="BrawlLMB">
+        <h1>BrawlLMB</h1>
+    </a>
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+    <nav id="mainNav">
+        <a href="cuenta.html">Mi Cuenta</a>
+        <a href="estadisticas.html">Estad&iacute;sticas</a>
+        <a href="mapas.html">Mapas</a>
+        <a href="tierlist.html">Tierlists</a>
+        <a href="rankeds.html" class="activo">Rankeds</a>
+        <a href="#" onclick="event.preventDefault(); logout();">Salir</a>
+    </nav>
+</header>
+
+<main>
+    <div class="page-header">
+        <h2 id="tituloCuenta" class="section-title">Detalle Ranked</h2>
+        <p id="subtituloCuenta" class="section-subtitle"></p>
+    </div>
+
+    <div class="text-center mb-3">
+        <button class="btn btn-sm" onclick="sincronizarRanked()">Sincronizar datos</button>
+        <a href="rankeds.html" class="btn btn-sm btn-outline" style="margin-left:10px;">Volver</a>
+    </div>
+
+    <div id="detalleContainer">
+        <div class="text-center" style="color:var(--text-muted); padding:2rem;">Cargando...</div>
+    </div>
+</main>
+
+<footer>
+    &copy; 2025 BrawlLMB Analytics &mdash; Todos los derechos reservados.
+</footer>
+
+<script src="js/auth.js"></script>
+<script>
+let cuentaIdActual = null;
+
+function toggleMenu() {
+    document.getElementById('mainNav').classList.toggle('open');
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    cuentaIdActual = params.get("cuentaId");
+    if (!cuentaIdActual) {
+        document.getElementById('detalleContainer').innerHTML = '<div class="empty-state"><p>No se ha seleccionado ninguna cuenta.</p></div>';
+        return;
+    }
+    cargarDetalleRanked(cuentaIdActual);
+});
+
+async function cargarDetalleRanked(cuentaId) {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        document.getElementById('detalleContainer').innerHTML = '<div class="empty-state"><p>Debes iniciar sesi&oacute;n.</p></div>';
+        return;
+    }
+
+    try {
+        const res = await fetch(`${API_BASE}/rankeds/cuenta/${cuentaId}`, {
+            headers: { "Authorization": `Bearer ${token}` },
+            credentials: 'include'
+        });
+
+        if (!res.ok) {
+            let msg = "Error cargando datos ranked.";
+            try { const ej = await res.json(); msg = ej.message ?? msg; } catch { msg = `Error ${res.status}`; }
+            document.getElementById('detalleContainer').innerHTML = `<p style="color:var(--red); text-align:center;">${msg}</p>`;
+            return;
+        }
+
+        const data = await res.json();
+        pintarDetalle(data);
+
+    } catch (err) {
+        console.error("Error:", err);
+        document.getElementById('detalleContainer').innerHTML = '<p style="color:var(--red); text-align:center;">Error inesperado.</p>';
+    }
+}
+
+function pintarDetalle(data) {
+    document.getElementById('tituloCuenta').textContent = `Ranked de ${data.nombre}`;
+    document.getElementById('subtituloCuenta').textContent = data.tag;
+
+    const cont = document.getElementById('detalleContainer');
+    let html = '';
+
+    // Rango actual
+    html += `
+        <div class="glass-static" style="padding:2rem; max-width:800px; margin:0 auto 2rem; text-align:center;">
+            <h3 style="margin-bottom:1rem;">Rango Actual</h3>
+            <div style="font-size:2.5rem; font-weight:800; background:linear-gradient(135deg, var(--accent-light), var(--cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">
+                ${data.currentRank?.rank || 'Sin datos'}
+            </div>
+            <p style="color:var(--gold); font-size:1.2rem; margin-top:0.5rem;">${(data.currentRank?.trophies || 0).toLocaleString()} trofeos</p>
+        </div>
+    `;
+
+    // Temporadas
+    if (data.temporadas && data.temporadas.length > 0) {
+        html += `
+            <div class="glass-static" style="padding:2rem; max-width:800px; margin:0 auto 2rem;">
+                <h3 style="margin-bottom:1rem;">Historial de Temporadas</h3>
+                <table class="top-brawlers-table" style="width:100%;">
+                    <thead><tr><th>Temporada</th><th>Rango</th><th>Trofeos</th></tr></thead>
+                    <tbody>
+        `;
+        data.temporadas.forEach(t => {
+            html += `<tr>
+                <td class="rank-num">#${t.seasonNumber}</td>
+                <td>${t.rank}</td>
+                <td class="winrate">${t.trophies.toLocaleString()}</td>
+            </tr>`;
+        });
+        html += '</tbody></table></div>';
+    } else {
+        html += '<div class="glass-static" style="padding:2rem; max-width:800px; margin:0 auto 2rem; text-align:center;"><p style="color:var(--text-muted);">No hay datos de temporadas.</p></div>';
+    }
+
+    // Ultimas partidas
+    if (data.ultimasPartidas && data.ultimasPartidas.length > 0) {
+        html += `
+            <div class="glass-static" style="padding:2rem; max-width:800px; margin:0 auto;">
+                <h3 style="margin-bottom:1rem;">Últimas 10 Partidas Ranked</h3>
+                <table class="top-brawlers-table" style="width:100%;">
+                    <thead><tr><th>Fecha</th><th>Modo</th><th>Brawler</th><th>Pos.</th><th>Trofeos</th></tr></thead>
+                    <tbody>
+        `;
+        data.ultimasPartidas.forEach(m => {
+            const fecha = new Date(m.battleTime).toLocaleDateString('es-ES');
+            const change = m.trophyChange > 0 ? `+${m.trophyChange}` : m.trophyChange;
+            const changeColor = m.trophyChange > 0 ? 'var(--green)' : m.trophyChange < 0 ? 'var(--red)' : 'var(--text-muted)';
+            html += `<tr>
+                <td>${fecha}</td>
+                <td>${m.mode}</td>
+                <td>${m.brawlerName}</td>
+                <td>${m.rank || '-'}</td>
+                <td style="color:${changeColor}; font-weight:600;">${change}</td>
+            </tr>`;
+        });
+        html += '</tbody></table></div>';
+    } else {
+        html += '<div class="glass-static" style="padding:2rem; max-width:800px; margin:0 auto; text-align:center;"><p style="color:var(--text-muted);">No hay partidas ranked recientes.</p></div>';
+    }
+
+    cont.innerHTML = html;
+}
+
+async function sincronizarRanked() {
+    const token = localStorage.getItem("token");
+    if (!token || !cuentaIdActual) return;
+
+    try {
+        const res = await fetch(`${API_BASE}/rankeds/cuenta/${cuentaIdActual}/sync`, {
+            method: "POST",
+            headers: { "Authorization": `Bearer ${token}` },
+            credentials: 'include'
+        });
+
+        if (res.ok) {
+            alert("Datos sincronizados correctamente.");
+            cargarDetalleRanked(cuentaIdActual);
+        } else {
+            alert("Error al sincronizar datos.");
+        }
+    } catch (err) {
+        console.error("Error:", err);
+        alert("Error inesperado al sincronizar.");
+    }
+}
+</script>
+</body>
+</html>
