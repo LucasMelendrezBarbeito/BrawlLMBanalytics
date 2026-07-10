@@ -52,8 +52,8 @@ Two external APIs are consumed, via two different HTTP client stacks — when ad
 
 ## Testing
 
-- Only one test exists: `BackendApplicationTests` (`@SpringBootTest`). It loads the full Spring context, so **MySQL must be running** or it fails.
-- No unit tests or mocked-service tests exist.
+- Tests run against **H2 in-memory** via the `test` profile (`src/test/resources/application-test.properties`) — **no MySQL or env vars needed**. Run with `mvnw test`.
+- `BackendApplicationTests` (`@SpringBootTest`, context load) and `SeguridadIntegrationTest` (`@AutoConfigureMockMvc`, exercises the security behaviors of Fases 1–2: public vs protected endpoints, invalid token → 401, validation → 400, generic login errors, no password/email leak).
 
 ## Project quirks
 
