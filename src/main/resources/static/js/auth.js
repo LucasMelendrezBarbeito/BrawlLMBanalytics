@@ -409,8 +409,10 @@ async function cargarTierlists() {
                 <div class="tierlist-card glass animate-in">
                     <h3>${t.nombre}</h3>
                     <p class="creator">Creador: ${t.usuario?.username ?? "An&oacute;nimo"}</p>
-                    <button class="btn btn-sm" onclick="window.location.href='tierlist_ver.html?id=${t.id}'">Ver Tierlist</button>
-                    <button class="btn btn-sm btn-danger" onclick="borrarTierlist(${t.id})" style="margin-left:8px;">Eliminar</button>
+                    <div style="display:flex; gap:10px; margin-top:1rem;">
+                        <button class="btn btn-sm" onclick="window.location.href='tierlist_ver.html?id=${t.id}'">Ver Tierlist</button>
+                        <button class="btn btn-sm btn-danger" onclick="borrarTierlist(${t.id})">Eliminar</button>
+                    </div>
                 </div>`;
         });
         cont.innerHTML = html;
