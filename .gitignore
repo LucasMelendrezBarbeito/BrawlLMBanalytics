@@ -34,3 +34,7 @@ build/
 
 ### Claude Code ###
 .claude/worktrees/
+
+### Secrets (nunca commitear valores reales) ###
+.env
+application-local.properties
