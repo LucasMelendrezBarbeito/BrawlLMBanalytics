@@ -143,7 +143,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
                 const body = {
-                    usuarioId: parseInt(userId),
                     tag:       player.tag,
                     nombre:    player.name,
                     trofeos:   player.trophies,
@@ -210,7 +209,7 @@ async function cargarCuentasVinculadas(cuentasContainer) {
     }
 
     try {
-        const res = await fetch(`${API_BASE}/cuentas/usuario/${userId}`, {
+        const res = await fetch(`${API_BASE}/cuentas/mias`, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }

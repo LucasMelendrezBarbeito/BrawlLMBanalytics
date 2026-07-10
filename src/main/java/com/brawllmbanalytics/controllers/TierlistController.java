@@ -38,10 +38,15 @@ public class TierlistController {
 
     @PostMapping("/crear")
     public Tierlist crearTierlist(
-            @RequestParam Integer usuarioId,
-            @RequestParam String nombre) {
+            @RequestParam String nombre,
+            @RequestHeader("Authorization") String tokenHeader) {
 
-        return tierlistService.crearTierlist(usuarioId, nombre);
+        String token = tokenHeader.replace("Bearer ", "");
+        String username = jwtUtil.extractUsername(token);
+        Usuario user = usuarioRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        return tierlistService.crearTierlist(user.getId(), nombre);
     }
 
     @PostMapping("/{id}/agregar-item")
