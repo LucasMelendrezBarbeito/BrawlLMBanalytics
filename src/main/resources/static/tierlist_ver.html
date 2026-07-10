@@ -97,6 +97,13 @@ function toggleMenu() {
     document.getElementById('mainNav').classList.toggle('open');
 }
 
+async function logout() {
+    try { await fetch(`${API_BASE}/auth/logout`, { method: "POST", credentials: 'include' }); }
+    catch (e) { console.error("Error during logout:", e); }
+    localStorage.clear();
+    window.location.href = "login.html";
+}
+
 function inicializarRating() {
     const pips = document.querySelectorAll(".rating-pip");
     pips.forEach(pip => {

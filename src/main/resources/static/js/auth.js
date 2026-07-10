@@ -277,9 +277,22 @@ async function inicializarPaginaMapas(rotacionContainer, topContainer) {
 
 async function pintarMapasRotacion(contenedor, mapasRot) {
     if (!mapasRot || !mapasRot.length) { contenedor.innerHTML = '<div class="empty-state"><p>No hay mapas en rotaci&oacute;n.</p></div>'; return; }
+    contenedor.innerHTML = '<div class="text-center" style="color:var(--text-muted); padding:1rem;">Cargando mapas...</div>';
+    const validMaps = [];
+    const checks = mapasRot.map(r => {
+        return new Promise(resolve => {
+            if (!r.supercellId) { resolve(); return; }
+            const img = new Image();
+            img.onload = () => { validMaps.push(r); resolve(); };
+            img.onerror = () => resolve();
+            img.src = `https://cdn.brawlify.com/maps/regular/${r.supercellId}.png`;
+        });
+    });
+    await Promise.all(checks);
+    if (!validMaps.length) { contenedor.innerHTML = '<div class="empty-state"><p>No hay mapas con imagen disponible.</p></div>'; return; }
     let html = "";
-    mapasRot.forEach(r => {
-        const img = r.supercellId ? `https://cdn.brawlify.com/maps/regular/${r.supercellId}.png` : "images/map_placeholder.png";
+    validMaps.forEach(r => {
+        const img = `https://cdn.brawlify.com/maps/regular/${r.supercellId}.png`;
         html += `
             <div class="map-card" data-id="${r.id ?? -1}" onclick="toggleFlip(this)">
                 <div class="map-card-inner">
@@ -315,7 +328,8 @@ function pintarMapasPorModo(mapasPorModo, topContainer) {
     const contenedor = document.getElementById("mapasPorModo");
     contenedor.innerHTML = "";
     Object.keys(mapasPorModo).forEach(modo => {
-        const mapas = mapasPorModo[modo];
+        const mapas = mapasPorModo[modo].filter(m => m.supercellId);
+        if (!mapas.length) return;
         let html = `
             <div class="mode-block">
                 <h4 class="mode-title">${modo}</h4>

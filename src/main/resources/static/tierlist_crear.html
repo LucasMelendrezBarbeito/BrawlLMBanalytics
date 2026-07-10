@@ -77,6 +77,13 @@ function toggleMenu() {
     document.getElementById('mainNav').classList.toggle('open');
 }
 
+async function logout() {
+    try { await fetch(`${API_BASE}/auth/logout`, { method: "POST", credentials: 'include' }); }
+    catch (e) { console.error("Error during logout:", e); }
+    localStorage.clear();
+    window.location.href = "login.html";
+}
+
 async function cargarBrawlers() {
     const res = await fetch(`${API_BASE}/brawl/brawlers`);
     listaBrawlers = await res.json();
