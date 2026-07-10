@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter;
 
 @Configuration
 public class SecurityConfig {
@@ -37,6 +38,26 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .cors(cors -> cors.disable())
+            .headers(headers -> headers
+                // CSP permisiva con inline (el frontend usa scripts/estilos inline y onclick),
+                // pero acota los orígenes externos permitidos (Google Fonts, cdn.brawlify.com).
+                .contentSecurityPolicy(csp -> csp.policyDirectives(
+                        "default-src 'self'; " +
+                        "script-src 'self' 'unsafe-inline'; " +
+                        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+                        "font-src 'self' https://fonts.gstatic.com; " +
+                        "img-src 'self' data: https:; " +
+                        "connect-src 'self'; " +
+                        "base-uri 'self'; " +
+                        "form-action 'self'; " +
+                        "frame-ancestors 'none'"))
+                .frameOptions(frame -> frame.deny())
+                .httpStrictTransportSecurity(hsts -> hsts
+                        .includeSubDomains(true)
+                        .maxAgeInSeconds(31536000))
+                .referrerPolicy(referrer -> referrer.policy(
+                        ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN))
+            )
             .sessionManagement(session ->
                     session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
