@@ -137,7 +137,7 @@ async function cargarCuentasVinculadas(cuentasContainer) {
                     <h3>${c.nombre}</h3>
                     <p class="tag">${c.tag}</p>
                     <p class="trophies">Trofeos: ${c.trofeos}</p>
-                    <div style="display:flex; gap:10px; margin-top:1rem;">
+                    <div style="display:flex; gap:10px; margin-top:1rem; justify-content:center;">
                         <button class="btn btn-sm" onclick="verEstadisticasDesdeCuenta('${tagSinAlmohadilla}')">Ver estadísticas</button>
                         <button class="btn btn-sm btn-danger" onclick="eliminarCuenta(${c.id})">Eliminar</button>
                     </div>
