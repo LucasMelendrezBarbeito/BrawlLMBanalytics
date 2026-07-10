@@ -6,6 +6,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 BrawlLMBanalytics is a data-analysis web platform for the mobile game **Brawl Stars**. It lets users link their game accounts to view personal/brawler stats, browse the map catalog with per-map winrate rankings, track the live event rotation, and build interactive drag-and-drop tierlists with a star-rating/comments review system. It integrates the official Supercell Brawl Stars API and the community Brawlify (BrawlAPI) API.
 
+## Workflow
+
+- **Commit after each verified change.** Once something is implemented AND tested to work (it compiles, the app boots, and the affected behavior is exercised), commit it — no need to ask each time; this is standing authorization for this repo. Keep commits small and scoped to a single verified unit.
+- **Never commit secrets** (tokens, `jwt.secret`, DB credentials) — see the constitution, Principle I.
+- This mirrors the constitution's "Flujo de Desarrollo" section (`.specify/memory/constitution.md`).
+
 ## Commands
 
 ```bash
