@@ -35,6 +35,9 @@ build/
 ### Claude Code ###
 .claude/worktrees/
 
+### OpenCode ###
+.opencode/
+
 ### Secrets (nunca commitear valores reales) ###
 .env
 application-local.properties
